@@ -232,8 +232,6 @@ button:active {
 .card.special-special {
   border: 1px solid transparent;
   border-radius: 24px;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)),
-    linear-gradient(135deg, #f5a7ff, #6bd7ff, #fff07a, #ff90c8, #9d7bff);
   background-origin: padding-box, border-box;
   background-clip: padding-box, border-box;
 }
