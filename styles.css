@@ -186,14 +186,17 @@ button:active {
 
 .card-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .card h2 {
   margin: 0;
   font-size: 1.15rem;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .badge {
