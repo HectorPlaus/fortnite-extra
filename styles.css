@@ -14,6 +14,9 @@
 
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 body {
@@ -23,6 +26,7 @@ body {
   background: radial-gradient(circle at top, rgba(80, 250, 123, 0.08), transparent 40%),
     linear-gradient(180deg, #111827 0%, #090b10 100%);
   color: var(--text);
+  touch-action: manipulation;
 }
 
 main {
@@ -74,10 +78,6 @@ button:hover {
     flex-direction: column;
     align-items: flex-start;
   }
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
   .card-footer {
     flex-direction: column;
     align-items: flex-start;
@@ -104,6 +104,16 @@ button:active {
   gap: 20px;
 }
 
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  main {
+    padding: 12px;
+  }
+}
+
 #variantGrid {
   margin-top: 28px;
 }
@@ -116,6 +126,13 @@ button:active {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+@media (max-width: 500px) {
+  .card {
+    padding: 12px;
+    gap: 10px;
+  }
 }
 
 .card-image {
@@ -188,6 +205,8 @@ button:active {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .card h2 {
@@ -198,6 +217,22 @@ button:active {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media (max-width: 500px) {
+  .card-header {
+    gap: 4px;
+  }
+  .card h2 {
+    font-size: 0.95rem;
+  }
+  .cost {
+    font-size: 0.8rem;
+  }
+  .badge {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
 }
 
 .badge {
@@ -243,6 +278,13 @@ button:active {
   padding: 12px 14px;
   border-radius: 14px;
   font-weight: 700;
+}
+
+@media (max-width: 500px) {
+  .lost-btn {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
 }
 
 .lost-btn:hover {
@@ -294,6 +336,12 @@ select {
   align-items: center;
 }
 
+@media (max-width: 500px) {
+  .level-row {
+    gap: 6px;
+  }
+}
+
 .level-value {
   text-align: center;
   padding: 12px 0;
@@ -301,6 +349,13 @@ select {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
+}
+
+@media (max-width: 500px) {
+  .level-value {
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
 }
 
 .level-value.dominated {
@@ -321,6 +376,14 @@ select {
   font-size: 1.25rem;
 }
 
+@media (max-width: 500px) {
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}
+
 .control-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
@@ -334,6 +397,12 @@ select {
   flex-wrap: wrap;
 }
 
+@media (max-width: 500px) {
+  .card-footer {
+    gap: 8px;
+  }
+}
+
 .card-footer button {
   flex: 1 1 auto;
 }
@@ -345,8 +414,11 @@ footer {
   font-size: 0.95rem;
 }
 
-@media (max-width: 600px) {
-  .level-row {
-    grid-template-columns: 1fr 1fr 1fr;
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  header {
+    margin-bottom: 12px;
   }
 }
