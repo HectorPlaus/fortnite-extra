@@ -53,12 +53,3 @@ Los datos se guardan en **localStorage del navegador** (en tu dispositivo), no e
 - `styles.css` - Estilos y diseño responsive
 - `script.js` - Lógica de la aplicación y gestión de estado
 
-## Deploy en GitHub Pages
-
-1. Crea un repositorio en GitHub llamado `fortnite-extra`
-2. Haz push de los archivos
-3. Ve a Settings → Pages
-4. Selecciona "Deploy from a branch" y elige `main` (o la rama donde esté el código)
-5. Tu sitio estará en `https://tu-usuario.github.io/fortnite-extra/`
-
-Los datos se guardarán localmente en tu dispositivo cuando uses la app, sin depender de ningún servidor.
