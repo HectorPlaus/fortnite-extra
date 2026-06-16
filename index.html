@@ -8,18 +8,32 @@
 </head>
 <body>
   <main>
-    <header>
-      <div class="actions">
-        <button id="resetAll">Reiniciar todo</button>
-        <div class="summary">
-          <span id="totalSpirits"></span>
-          <span id="dominatedCount"></span>
+    <header class="page-header">
+      
+      <div class="controls-row">
+        <div class="actions">
+          <button id="resetAll">Reiniciar todo</button>
+          <div class="summary">
+            <span id="totalSpirits"></span>
+            <span id="registeredCount"></span>
+            <span id="dominatedCount"></span>
+          </div>
+        </div>
+        <div class="sort-panel">
+          <label for="sortSelect">Ordenar por</label>
+          <select id="sortSelect">
+            <option value="default">Predeterminado</option>
+            <option value="registered">Registrados</option>
+            <option value="rarity">Rareza</option>
+            <option value="status">Dominados</option>
+          </select>
         </div>
       </div>
     </header>
 
-    <div id="spiritGrid" class="grid"></div>
-    <div id="variantGrid" class="grid"></div>
+    <section class="section">
+      <div id="spiritGrid" class="grid"></div>
+    </section>
   </main>
 
   <script src="script.js"></script>
