@@ -452,11 +452,41 @@ button:disabled {
     font-size: 1rem;
   }
   .cost {
-    font-size: 0.8rem;
+    display: none;
   }
   .badge {
     padding: 6px 10px;
     font-size: 0.7rem;
+  }
+  .level-label {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .lost-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  .register-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .level-row {
+    gap: 8px;
+  }
+  .card-footer {
+    gap: 8px;
+    flex-wrap: wrap;
   }
 }
 
