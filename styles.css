@@ -438,62 +438,59 @@ button:disabled {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
   main {
     padding: 12px;
   }
+
   .card {
-    padding: 16px;
-    gap: 12px;
+    padding: 12px;
+    gap: 10px;
   }
+
   .card-header {
     gap: 6px;
   }
+
   .card h2 {
     font-size: 1rem;
   }
+
   .cost {
     display: none;
   }
+
   .badge {
     padding: 6px 10px;
     font-size: 0.7rem;
   }
+
   .level-label {
     padding: 8px 12px;
     font-size: 0.9rem;
     font-weight: 700;
   }
-  .control-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-  .lost-btn {
-    padding: 10px 12px;
-    font-size: 0.85rem;
-  }
-  .register-btn {
-    padding: 10px 12px;
-    font-size: 0.85rem;
-  }
+
+  .control-btn,
   .icon-btn {
     width: 40px;
     height: 40px;
     font-size: 1rem;
   }
-  .level-row {
-    gap: 8px;
+
+  .lost-btn,
+  .register-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
   }
+
+  .level-row,
   .card-footer {
     gap: 8px;
-    flex-wrap: wrap;
   }
-}
 
-@media (max-width: 500px) {
-  .card {
-    padding: 12px;
-    gap: 10px;
+  .card-footer {
+    flex-wrap: wrap;
   }
 }
 
