@@ -78,10 +78,12 @@ button:hover {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .card-footer {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .card-footer button {
     width: auto;
   }
@@ -110,6 +112,7 @@ button:active {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
   main {
     padding: 12px;
   }
@@ -123,7 +126,7 @@ button:active {
   display: grid;
   gap: 18px;
   padding: 24px 0 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .page-header h1 {
@@ -136,7 +139,7 @@ button:active {
 .page-header p {
   margin: 10px 0 0;
   max-width: 760px;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .controls-row {
@@ -159,7 +162,7 @@ button:active {
 }
 
 .sort-panel select {
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(15, 23, 42, 0.96);
   color: var(--text);
   border-radius: 14px;
@@ -170,7 +173,7 @@ button:active {
 
 .sort-panel select:focus,
 .sort-panel select:hover {
-  background: rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .sort-panel option {
@@ -205,13 +208,13 @@ button:active {
 
 .card {
   background: linear-gradient(180deg, rgba(19, 27, 42, 0.96), rgba(11, 15, 25, 0.92));
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 28px;
   padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -224,7 +227,7 @@ button:active {
 
 .card.selected {
   border-color: rgba(80, 250, 123, 0.55);
-  box-shadow: 0 26px 60px rgba(80,250,123,0.2);
+  box-shadow: 0 26px 60px rgba(80, 250, 123, 0.2);
 }
 
 .card.unregistered {
@@ -236,11 +239,11 @@ button:active {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
-              radial-gradient(circle at bottom right, rgba(98, 165, 255, 0.10), transparent 24%);
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(98, 165, 255, 0.10), transparent 24%);
 }
 
-.card > * {
+.card>* {
   position: relative;
   z-index: 1;
 }
@@ -258,7 +261,7 @@ button:active {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
 }
 
 .badge {
@@ -269,12 +272,35 @@ button:active {
   letter-spacing: 0.05em;
 }
 
-.badge.common { background: rgba(171, 184, 255, 0.12); color: #c3cfe5; }
-.badge.rare { background: rgba(123, 182, 255, 0.18); color: #9cc5ff; }
-.badge.epic { background: rgba(192, 132, 255, 0.18); color: #d3b8ff; }
-.badge.legendary { background: rgba(255, 184, 108, 0.18); color: #ffe5ad; }
-.badge.mythic { background: rgba(255, 110, 186, 0.16); color: #ffb7df; }
-.badge.special { background: rgba(255, 255, 255, 0.10); color: #ffffff; }
+.badge.common {
+  background: rgba(171, 184, 255, 0.12);
+  color: #c3cfe5;
+}
+
+.badge.rare {
+  background: rgba(123, 182, 255, 0.18);
+  color: #9cc5ff;
+}
+
+.badge.epic {
+  background: rgba(192, 132, 255, 0.18);
+  color: #d3b8ff;
+}
+
+.badge.legendary {
+  background: rgba(255, 184, 108, 0.18);
+  color: #ffe5ad;
+}
+
+.badge.mythic {
+  background: rgba(255, 110, 186, 0.16);
+  color: #ffb7df;
+}
+
+.badge.special {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
 
 .card-header {
   display: flex;
@@ -290,7 +316,7 @@ button:active {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
 
@@ -344,7 +370,7 @@ button:active {
 }
 
 .card-hint {
-  color: rgba(255,255,255,0.68);
+  color: rgba(255, 255, 255, 0.68);
   font-size: 0.88rem;
   letter-spacing: 0.02em;
 }
@@ -356,8 +382,8 @@ button:active {
 .lost-btn,
 .control-btn,
 .icon-btn {
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   border-radius: 14px;
   padding: 12px 14px;
@@ -370,7 +396,7 @@ button:active {
 .icon-btn:hover,
 button:hover {
   transform: translateY(-1px);
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .control-btn {
@@ -389,9 +415,10 @@ button:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 120px;
+  min-width: 0;
+  width: 100%;
   border-radius: 16px;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text);
   padding: 12px 14px;
 }
@@ -418,6 +445,7 @@ button:disabled {
 }
 
 @media (max-width: 700px) {
+
   .controls-row,
   .section-header,
   .card-footer,
@@ -425,9 +453,11 @@ button:disabled {
     flex-direction: column;
     align-items: stretch;
   }
+
   .controls-row {
     align-items: flex-start;
   }
+
   .sort-panel {
     width: 100%;
   }
@@ -509,6 +539,7 @@ button:disabled {
   display: block;
   object-fit: cover;
 }
+
 .cost {
   color: var(--text-muted);
   font-size: 0.95rem;
@@ -581,12 +612,15 @@ button:disabled {
   .card-header {
     gap: 4px;
   }
+
   .card h2 {
     font-size: 0.95rem;
   }
+
   .cost {
     font-size: 0.8rem;
   }
+
   .badge {
     padding: 4px 8px;
     font-size: 0.7rem;
@@ -601,11 +635,31 @@ button:disabled {
   letter-spacing: 0.02em;
 }
 
-.badge.common { background: rgba(171, 184, 255, 0.12); color: #c3cfe5; }
-.badge.rare { background: rgba(123, 182, 255, 0.16); color: #9cc5ff; }
-.badge.epic { background: rgba(192, 132, 255, 0.14); color: #d3b8ff; }
-.badge.legendary { background: rgba(255, 184, 108, 0.16); color: #ffe5ad; }
-.badge.mythic { background: rgba(221, 148, 255, 0.16); color: #f5c6ff; }
+.badge.common {
+  background: rgba(171, 184, 255, 0.12);
+  color: #c3cfe5;
+}
+
+.badge.rare {
+  background: rgba(123, 182, 255, 0.16);
+  color: #9cc5ff;
+}
+
+.badge.epic {
+  background: rgba(192, 132, 255, 0.14);
+  color: #d3b8ff;
+}
+
+.badge.legendary {
+  background: rgba(255, 184, 108, 0.16);
+  color: #ffe5ad;
+}
+
+.badge.mythic {
+  background: rgba(221, 148, 255, 0.16);
+  color: #f5c6ff;
+}
+
 .badge.special {
   background: linear-gradient(135deg, #f5a7ff 0%, #6bd7ff 25%, #fff07a 50%, #ff90c8 75%, #9d7bff 100%);
   color: #0b0b0d;
@@ -616,12 +670,15 @@ button:disabled {
 .card.special-gold {
   border-color: #d4af37;
 }
+
 .card.special-gummy {
   border-color: #ff89dc;
 }
+
 .card.special-galaxy {
   border-color: #9b5cff;
 }
+
 .card.special-special {
   border: 1px solid transparent;
   border-radius: 24px;
@@ -775,7 +832,28 @@ footer {
   h1 {
     font-size: 1.5rem;
   }
+
   header {
     margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .level-row {
+    grid-template-columns: 40px 1fr 40px;
+    gap: 4px;
+  }
+
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0;
+  }
+
+  .level-value {
+    min-width: 0;
+    width: 100%;
+    font-size: 0.85rem;
   }
 }

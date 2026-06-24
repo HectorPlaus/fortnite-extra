@@ -1,16 +1,16 @@
 const baseSprites = [
-  { id: 1, name: 'Water Sprite', cost: 100, rarity: 'rare', type: 'Elemental', image: 'https://static.wikia.nocookie.net/fortnite/images/a/a4/Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20241201124607' },
-  { id: 2, name: 'Earth Sprite', cost: 100, rarity: 'rare', type: 'Elemental', image: 'https://static.wikia.nocookie.net/fortnite/images/c/cf/Earth_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606121336' },
-  { id: 3, name: 'Fire Sprite', cost: 100, rarity: 'rare', type: 'Elemental', image: 'https://static.wikia.nocookie.net/fortnite/images/a/a4/Fire_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606121040' },
-  { id: 4, name: 'Duck Sprite', cost: 3000, rarity: 'epic', type: 'Beast', image: 'https://static.wikia.nocookie.net/fortnite/images/d/d7/Duck_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120733' },
-  { id: 5, name: 'Demon Sprite', cost: 3000, rarity: 'epic', type: 'Demon', image: 'https://static.wikia.nocookie.net/fortnite/images/9/9f/Demon_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120658' },
-  { id: 6, name: 'Ghost Sprite', cost: 3000, rarity: 'epic', type: 'Spirit', image: 'https://static.wikia.nocookie.net/fortnite/images/6/68/Ghost_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120821' },
-  { id: 7, name: 'King Sprite', cost: 3000, rarity: 'epic', type: 'Royal', image: 'https://static.wikia.nocookie.net/fortnite/images/9/9f/King_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120900' },
-  { id: 8, name: 'Punk Sprite', cost: 5000, rarity: 'legendary', type: 'Rebel', image: 'https://static.wikia.nocookie.net/fortnite/images/0/02/Punk_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120226' },
-  { id: 9, name: 'Dream Sprite', cost: 5000, rarity: 'legendary', type: 'Dream', image: 'https://static.wikia.nocookie.net/fortnite/images/9/99/Dream_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606121205' },
-  { id: 10, name: 'Burnt Peanut', cost: 7500, rarity: 'mythic', type: 'Mythic', image: 'https://static.wikia.nocookie.net/fortnite/images/0/0b/Burnt_Peanut_-_Item_-_Fortnite.png/revision/latest?cb=20260606183106' },
-  { id: 11, name: 'Zero Point Sprite', cost: 7500, rarity: 'mythic', type: 'Cosmic', image: 'https://static.wikia.nocookie.net/fortnite/images/a/a4/Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120116' }
-];
+  { id: 1, name: 'Water Sprite', rarity: 'rare', type: 'Elemental', image: 'https://static.wikia.nocookie.net/fortnite/images/a/a4/Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20241201124607' },
+  { id: 2, name: 'Earth Sprite',  rarity: 'rare', type: 'Elemental', image: 'https://static.wikia.nocookie.net/fortnite/images/c/cf/Earth_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606121336' },
+  { id: 3, name: 'Fire Sprite',  rarity: 'rare', type: 'Elemental', image: 'https://static.wikia.nocookie.net/fortnite/images/a/a4/Fire_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606121040' },
+  { id: 4, name: 'Duck Sprite',rarity: 'epic', type: 'Beast', image: 'https://static.wikia.nocookie.net/fortnite/images/d/d7/Duck_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120733' },
+  { id: 5, name: 'Demon Sprite', rarity: 'epic', type: 'Demon', image: 'https://static.wikia.nocookie.net/fortnite/images/9/9f/Demon_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120658' },
+  { id: 6, name: 'Ghost Sprite',  rarity: 'epic', type: 'Spirit', image: 'https://static.wikia.nocookie.net/fortnite/images/6/68/Ghost_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120821' },
+  { id: 7, name: 'King Sprite',rarity: 'epic', type: 'Royal', image: 'https://static.wikia.nocookie.net/fortnite/images/9/9f/King_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120900' },
+  { id: 8, name: 'Punk Sprite',  rarity: 'legendary', type: 'Rebel', image: 'https://static.wikia.nocookie.net/fortnite/images/0/02/Punk_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120226' },
+  { id: 9, name: 'Dream Sprite',  rarity: 'legendary', type: 'Dream', image: 'https://static.wikia.nocookie.net/fortnite/images/9/99/Dream_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606121205' },
+  { id: 10, name: 'Zero Point Sprite',  rarity: 'mythic', type: 'Cosmic', image: 'https://static.wikia.nocookie.net/fortnite/images/a/a4/Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606120116' },
+  { id: 11, name: 'Burnt Peanut',  rarity: 'mythic', type: 'Mythic', image: 'https://static.wikia.nocookie.net/fortnite/images/0/0b/Burnt_Peanut_-_Item_-_Fortnite.png/revision/latest?cb=20260606183106' }
+  ];
 //https://fortnite.gg/img/x/sprites/crown.webp
 
 const specialTypes = ['Gold', 'Gummy', 'Galaxy'];
@@ -30,7 +30,7 @@ const specialTypeImages = {
     7: 'https://static.wikia.nocookie.net/fortnite/images/4/44/Gold_King_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185045',
     8: 'https://static.wikia.nocookie.net/fortnite/images/5/52/Gold_Punk_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
     9: 'https://static.wikia.nocookie.net/fortnite/images/6/6e/Gold_Dream_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185045',
-    11:'https://static.wikia.nocookie.net/fortnite/images/9/95/Gold_Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046'
+    10:'https://static.wikia.nocookie.net/fortnite/images/9/95/Gold_Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046'
   },
   gummy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/7/7b/Gummy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -42,7 +42,7 @@ const specialTypeImages = {
     7: 'https://static.wikia.nocookie.net/fortnite/images/d/d7/Gummy_King_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185044',
     8: 'https://static.wikia.nocookie.net/fortnite/images/5/5c/Gummy_Punk_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
     9: 'https://static.wikia.nocookie.net/fortnite/images/d/dc/Gummy_Dream_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
-    11:'https://static.wikia.nocookie.net/fortnite/images/1/14/Gummy_Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046'
+    10:'https://static.wikia.nocookie.net/fortnite/images/1/14/Gummy_Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046'
   },
   galaxy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/4/43/Galaxy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -54,7 +54,7 @@ const specialTypeImages = {
     7: 'https://static.wikia.nocookie.net/fortnite/images/3/3f/Galaxy_King_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185045',
     8: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Punk_Galaxy_ui_L.webp',
     9: 'https://static.wikia.nocookie.net/fortnite/images/a/a2/Galaxy_Dream_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
-    11:'https://static.wikia.nocookie.net/fortnite/images/d/d2/Galaxy_Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046'
+    10:'https://static.wikia.nocookie.net/fortnite/images/d/d2/Galaxy_Zero_Point_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046'
   }
 };
 
@@ -79,14 +79,14 @@ let selectedItemId = null;
 
 function generateSpecials() {
   return baseSprites
-    .filter((sprite) => sprite.id !== 10)
+    .filter((sprite) => sprite.id !== 11)
     .flatMap((sprite) =>
       specialTypes.map((type) => ({
         id: `${sprite.id}-${type.toLowerCase()}`,
         name: sprite.name,
         specialType: type,
         type: sprite.type,
-        cost: sprite.cost,
+       // cost: sprite.cost,
         rarity: sprite.rarity,
         image: getSpecialImageByType(sprite.id, type) || sprite.image,
         level: 1,
@@ -172,14 +172,14 @@ function createCard(item) {
   title.className = 'visually-hidden';
   const displayName = item.name.replace(/ Sprite$/, '');
   title.textContent = displayName;
-  const cost = document.createElement('span');
-  cost.className = 'cost';
-  cost.innerHTML = `<img src="https://static.wikia.nocookie.net/fortnite/images/1/1b/Sprite_Dust_-_Icon_-_Fortnite.png/revision/latest/scale-to-width-down/25?cb=20260607135916" alt="Dust" /> ${item.cost}`;
+  //const cost = document.createElement('span');
+  //cost.className = 'cost';
+  //cost.innerHTML = `<img src="https://static.wikia.nocookie.net/fortnite/images/1/1b/Sprite_Dust_-_Icon_-_Fortnite.png/revision/latest/scale-to-width-down/25?cb=20260607135916" alt="Dust" /> ${item.cost}`;
   const badge = document.createElement('span');
   const badgeRarity = item.specialType ? item.specialType : item.rarity;
   badge.className = `badge ${item.specialType ? 'special' : item.rarity}`;
   badge.textContent = item.specialType ? item.specialType.toUpperCase() : capitalize(item.rarity);
-  header.append(title, cost, badge);
+  header.append(title, badge);
 
   const levelLabel = document.createElement('span');
   levelLabel.className = 'level-label';
@@ -272,7 +272,8 @@ function createCard(item) {
     const crown = document.createElement('span');
     crown.className = 'crown';
     crown.textContent = '👑';
-    header.insertBefore(crown, cost);
+    //header.insertBefore(crown, cost);
+    header.prepend(crown);
   }
   card.append(header);
   if (imageWrapper) card.appendChild(imageWrapper);
@@ -317,7 +318,14 @@ document.addEventListener('click', (event) => {
 
 function sortItems(items) {
   const sorted = [...items];
-  const filteredItems = currentSort === 'registered' ? sorted.filter((item) => item.register) : sorted;
+  const filteredItems =
+  currentSort === 'registered'
+    ? sorted.filter(item => item.register)
+    : currentSort === 'notRegistered'
+    ? sorted.filter(item => !item.register)
+    : currentSort === 'notDominated'
+    ? sorted.filter(item => !item.dominated)
+    : sorted;
   
   if (currentSort === 'rarity') {
     return filteredItems.sort((a, b) => {
@@ -336,6 +344,15 @@ function sortItems(items) {
       return a.dominated ? -1 : 1;
     });
   }
+
+  if (currentSort === 'status' || currentSort === 'notDominated') {
+  return filteredItems.sort((a, b) => {
+    if (a.dominated === b.dominated) {
+      return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
+    }
+    return a.dominated ? -1 : 1;
+  });
+}
   return filteredItems.sort((a, b) => {
     const baseIdA = String(a.id).split('-')[0];
     const baseIdB = String(b.id).split('-')[0];
