@@ -373,7 +373,7 @@ function itemMatchesFilters(item) {
     return (item.specialType || '').toLowerCase() === variant;
   });
 
-  const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.some((status) => {
+  const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.every((status) => {
     switch (status) {
       case 'registered':
         return item.register;
