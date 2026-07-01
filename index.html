@@ -38,36 +38,33 @@
             </div>
 
             <div class="menu-section">
+              <h4>Espíritus</h4>
+              <div id="spiritFilterOptions" class="checkbox-list"></div>
+            </div>
+
+            <div class="menu-section">
               <h4>Rareza</h4>
-              <select id="rarityFilterSelect">
-                <option value="all">Todas</option>
-                <option value="rare">Rare</option>
-                <option value="epic">Epic</option>
-                <option value="legendary">Legendary</option>
-                <option value="mythic">Mythic</option>
-              </select>
+              <div class="checkbox-list">
+                <label class="filter-option"><input type="checkbox" value="rare" data-filter-group="rarity"> Rare</label>
+                <label class="filter-option"><input type="checkbox" value="epic" data-filter-group="rarity"> Epic</label>
+                <label class="filter-option"><input type="checkbox" value="legendary" data-filter-group="rarity"> Legendary</label>
+                <label class="filter-option"><input type="checkbox" value="mythic" data-filter-group="rarity"> Mythic</label>
+              </div>
             </div>
 
             <div class="menu-section">
               <h4>Variante</h4>
-              <select id="variantFilterSelect">
-                <option value="all">Todas</option>
-                <option value="base">Básicas</option>
-                <option value="gold">Oro</option>
-                <option value="gummy">Gummy</option>
-                <option value="galaxy">Galaxy</option>
-              </select>
+              <div id="variantFilterOptions" class="checkbox-list"></div>
             </div>
 
             <div class="menu-section">
               <h4>Estado</h4>
-              <select id="statusFilterSelect">
-                <option value="all">Todos</option>
-                <option value="registered">Registrados</option>
-                <option value="notRegistered">No registrados</option>
-                <option value="dominated">Dominados</option>
-                <option value="notDominated">No dominados</option>
-              </select>
+              <div class="checkbox-list">
+                <label class="filter-option"><input type="checkbox" value="registered" data-filter-group="status"> Registrados</label>
+                <label class="filter-option"><input type="checkbox" value="notRegistered" data-filter-group="status"> No registrados</label>
+                <label class="filter-option"><input type="checkbox" value="dominated" data-filter-group="status"> Dominados</label>
+                <label class="filter-option"><input type="checkbox" value="notDominated" data-filter-group="status"> No dominados</label>
+              </div>
             </div>
 
             <button id="clearFiltersButton" type="button" class="secondary-action">Limpiar filtros</button>

@@ -101,17 +101,17 @@ const registeredCountElement = document.getElementById('registeredCount');
 const sortButton = document.getElementById('sortButton');
 const sortMenu = document.getElementById('sortMenu');
 const sortSelect = document.getElementById('sortSelect');
-const rarityFilterSelect = document.getElementById('rarityFilterSelect');
-const variantFilterSelect = document.getElementById('variantFilterSelect');
-const statusFilterSelect = document.getElementById('statusFilterSelect');
+const spiritFilterOptions = document.getElementById('spiritFilterOptions');
+const variantFilterOptions = document.getElementById('variantFilterOptions');
 const clearFiltersButton = document.getElementById('clearFiltersButton');
 
 let specials = [];
 let spirits = [];
 let currentSort = 'default';
-let currentRarityFilter = 'all';
-let currentVariantFilter = 'all';
-let currentStatusFilter = 'all';
+let selectedSpirits = [];
+let selectedRarities = [];
+let selectedVariants = [];
+let selectedStatuses = [];
 let selectedItemId = null;
 
 function generateSpecials() {
@@ -353,32 +353,46 @@ document.addEventListener('click', (event) => {
   }
 });
 
-function sortItems(items) {
-  const filteredItems = items.filter((item) => {
-    const matchesRarity = currentRarityFilter === 'all' || (item.rarity || '').toLowerCase() === currentRarityFilter;
-    const matchesVariant = currentVariantFilter === 'all'
-      ? true
-      : currentVariantFilter === 'base'
-        ? !item.specialType
-        : (item.specialType || '').toLowerCase() === currentVariantFilter;
+function normalizeSpiritValue(name) {
+  return (name || '').replace(/\s+Sprite$/i, '').trim().toLowerCase();
+}
 
-    const matchesStatus = (() => {
-      switch (currentStatusFilter) {
-        case 'registered':
-          return item.register;
-        case 'notRegistered':
-          return !item.register;
-        case 'dominated':
-          return item.dominated;
-        case 'notDominated':
-          return !item.dominated;
-        default:
-          return true;
-      }
-    })();
+function getSelectedValues(groupName) {
+  return Array.from(sortMenu.querySelectorAll(`input[type="checkbox"][data-filter-group="${groupName}"]:checked`)).map((input) => input.value);
+}
 
-    return matchesRarity && matchesVariant && matchesStatus;
+function itemMatchesFilters(item) {
+  const matchesSpirit = selectedSpirits.length === 0 || selectedSpirits.includes(normalizeSpiritValue(item.name));
+
+  const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes((item.rarity || '').toLowerCase());
+
+  const matchesVariant = selectedVariants.length === 0 || selectedVariants.some((variant) => {
+    if (variant === 'base') {
+      return !item.specialType;
+    }
+    return (item.specialType || '').toLowerCase() === variant;
   });
+
+  const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.some((status) => {
+    switch (status) {
+      case 'registered':
+        return item.register;
+      case 'notRegistered':
+        return !item.register;
+      case 'dominated':
+        return item.dominated;
+      case 'notDominated':
+        return !item.dominated;
+      default:
+        return false;
+    }
+  });
+
+  return matchesSpirit && matchesRarity && matchesVariant && matchesStatus;
+}
+
+function sortItems(items) {
+  const filteredItems = items.filter(itemMatchesFilters);
 
   const sorted = [...filteredItems];
 
@@ -482,13 +496,76 @@ function getItemById(id) {
   return String(id).includes('-') ? specials.find((item) => item.id === id) : spirits.find((item) => item.id === id);
 }
 
+function renderSpiritFilterOptions() {
+  spiritFilterOptions.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+
+  baseSprites.forEach((sprite) => {
+    const value = normalizeSpiritValue(sprite.name);
+    const label = document.createElement('label');
+    label.className = 'filter-option spirit-option';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = value;
+    checkbox.setAttribute('data-filter-group', 'spirit');
+
+    const thumb = document.createElement('img');
+    thumb.className = 'spirit-filter-thumb';
+    thumb.src = sprite.image;
+    thumb.alt = sprite.name;
+
+    const name = document.createElement('span');
+    name.className = 'spirit-filter-name';
+    name.textContent = sprite.name.replace(/\s+Sprite$/i, '');
+
+    label.append(checkbox, thumb, name);
+    fragment.appendChild(label);
+  });
+
+  spiritFilterOptions.appendChild(fragment);
+}
+
+function renderVariantFilterOptions() {
+  variantFilterOptions.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+  const earthSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'earth');
+
+  if (!earthSprite) {
+    return;
+  }
+
+  const variants = [
+    { value: 'base', image: earthSprite.image },
+    { value: 'gold', image: specialTypeImages.gold?.[earthSprite.id] || earthSprite.image },
+    { value: 'gummy', image: specialTypeImages.gummy?.[earthSprite.id] || earthSprite.image },
+    { value: 'galaxy', image: specialTypeImages.galaxy?.[earthSprite.id] || earthSprite.image }
+  ];
+
+  variants.forEach((variant) => {
+    const label = document.createElement('label');
+    label.className = 'filter-option variant-option';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = variant.value;
+    checkbox.setAttribute('data-filter-group', 'variant');
+
+    const thumb = document.createElement('img');
+    thumb.className = 'variant-filter-thumb';
+    thumb.src = variant.image;
+    thumb.alt = `Variante ${variant.value}`;
+
+    label.append(checkbox, thumb);
+    fragment.appendChild(label);
+  });
+
+  variantFilterOptions.appendChild(fragment);
+}
+
 function updateMenuUI() {
   sortSelect.value = currentSort;
-  rarityFilterSelect.value = currentRarityFilter;
-  variantFilterSelect.value = currentVariantFilter;
-  statusFilterSelect.value = currentStatusFilter;
-
-  const activeFilters = [currentRarityFilter !== 'all', currentVariantFilter !== 'all', currentStatusFilter !== 'all', currentSort !== 'default'].filter(Boolean).length;
+  const activeFilters = selectedSpirits.length + selectedRarities.length + selectedVariants.length + selectedStatuses.length;
   const buttonLabel = activeFilters > 0 ? `Filtros y orden (${activeFilters}) ▾` : 'Filtros y orden ▾';
   sortButton.innerHTML = buttonLabel;
 }
@@ -513,26 +590,23 @@ sortSelect.addEventListener('change', (event) => {
   render();
 });
 
-rarityFilterSelect.addEventListener('change', (event) => {
-  currentRarityFilter = event.target.value;
-  render();
-});
-
-variantFilterSelect.addEventListener('change', (event) => {
-  currentVariantFilter = event.target.value;
-  render();
-});
-
-statusFilterSelect.addEventListener('change', (event) => {
-  currentStatusFilter = event.target.value;
+sortMenu.addEventListener('change', () => {
+  selectedSpirits = getSelectedValues('spirit');
+  selectedRarities = getSelectedValues('rarity');
+  selectedVariants = getSelectedValues('variant');
+  selectedStatuses = getSelectedValues('status');
   render();
 });
 
 clearFiltersButton.addEventListener('click', () => {
   currentSort = 'default';
-  currentRarityFilter = 'all';
-  currentVariantFilter = 'all';
-  currentStatusFilter = 'all';
+  selectedSpirits = [];
+  selectedRarities = [];
+  selectedVariants = [];
+  selectedStatuses = [];
+  sortMenu.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+    checkbox.checked = false;
+  });
   render();
   closeSortMenu();
 });
@@ -568,4 +642,6 @@ function capitalize(text) {
 }
 
 loadState();
+renderSpiritFilterOptions();
+renderVariantFilterOptions();
 render();
