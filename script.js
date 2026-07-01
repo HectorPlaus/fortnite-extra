@@ -98,11 +98,20 @@ const resetAllButton = document.getElementById('resetAll');
 const dominatedCountElement = document.getElementById('dominatedCount');
 const totalSpiritsElement = document.getElementById('totalSpirits');
 const registeredCountElement = document.getElementById('registeredCount');
+const sortButton = document.getElementById('sortButton');
+const sortMenu = document.getElementById('sortMenu');
 const sortSelect = document.getElementById('sortSelect');
+const rarityFilterSelect = document.getElementById('rarityFilterSelect');
+const variantFilterSelect = document.getElementById('variantFilterSelect');
+const statusFilterSelect = document.getElementById('statusFilterSelect');
+const clearFiltersButton = document.getElementById('clearFiltersButton');
 
-let spirits = [];
 let specials = [];
+let spirits = [];
 let currentSort = 'default';
+let currentRarityFilter = 'all';
+let currentVariantFilter = 'all';
+let currentStatusFilter = 'all';
 let selectedItemId = null;
 
 function generateSpecials() {
@@ -345,56 +354,116 @@ document.addEventListener('click', (event) => {
 });
 
 function sortItems(items) {
-  const sorted = [...items];
-  const filteredItems =
-  currentSort === 'registered'
-    ? sorted.filter(item => item.register)
-    : currentSort === 'notRegistered'
-    ? sorted.filter(item => !item.register)
-    : currentSort === 'notDominated'
-    ? sorted.filter(item => !item.dominated)
-    : sorted;
-  
-  if (currentSort === 'rarity') {
-    return filteredItems.sort((a, b) => {
-      const rankA = rarityOrder[a.rarity || 'common'];
-      const rankB = rarityOrder[b.rarity || 'common'];
-      if (rankA !== rankB) return rankA - rankB;
-      return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
-    });
-  }
+  const filteredItems = items.filter((item) => {
+    const matchesRarity = currentRarityFilter === 'all' || (item.rarity || '').toLowerCase() === currentRarityFilter;
+    const matchesVariant = currentVariantFilter === 'all'
+      ? true
+      : currentVariantFilter === 'base'
+        ? !item.specialType
+        : (item.specialType || '').toLowerCase() === currentVariantFilter;
 
-  if (currentSort === 'status') {
-    return filteredItems.sort((a, b) => {
-      if (a.dominated === b.dominated) {
-        return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
+    const matchesStatus = (() => {
+      switch (currentStatusFilter) {
+        case 'registered':
+          return item.register;
+        case 'notRegistered':
+          return !item.register;
+        case 'dominated':
+          return item.dominated;
+        case 'notDominated':
+          return !item.dominated;
+        default:
+          return true;
       }
-      return a.dominated ? -1 : 1;
-    });
-  }
+    })();
 
-  if (currentSort === 'status' || currentSort === 'notDominated') {
-  return filteredItems.sort((a, b) => {
-    if (a.dominated === b.dominated) {
-      return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
-    }
-    return a.dominated ? -1 : 1;
+    return matchesRarity && matchesVariant && matchesStatus;
   });
+
+  const sorted = [...filteredItems];
+
+  switch (currentSort) {
+    case 'rarity':
+      return sorted.sort((a, b) => {
+        const rankA = rarityOrder[a.rarity || 'common'];
+        const rankB = rarityOrder[b.rarity || 'common'];
+
+        if (rankA !== rankB) {
+          return rankA - rankB;
+        }
+
+        return a.name.localeCompare(b.name, 'es', {
+          sensitivity: 'base'
+        });
+      });
+
+    case 'status':
+      return sorted.sort((a, b) => {
+        if (a.dominated === b.dominated) {
+          return a.name.localeCompare(b.name, 'es', {
+            sensitivity: 'base'
+          });
+        }
+
+        return a.dominated ? -1 : 1;
+      });
+
+    case 'variant':
+      return sorted.sort((a, b) => {
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3 };
+        const variantA = (a.specialType || 'base').toLowerCase();
+        const variantB = (b.specialType || 'base').toLowerCase();
+        const rankA = variantRank[variantA] ?? 0;
+        const rankB = variantRank[variantB] ?? 0;
+
+        if (rankA !== rankB) {
+          return rankA - rankB;
+        }
+
+        return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
+      });
+
+    default:
+      return sorted.sort((a, b) => {
+        const baseIdA = String(a.id).split('-')[0];
+        const baseIdB = String(b.id).split('-')[0];
+
+        if (baseIdA !== baseIdB) {
+          return Number(baseIdA) - Number(baseIdB);
+        }
+
+        if (!a.specialType && b.specialType) return -1;
+        if (a.specialType && !b.specialType) return 1;
+
+        if (a.specialType && b.specialType) {
+          return specialTypes.indexOf(a.specialType) - specialTypes.indexOf(b.specialType);
+        }
+
+        return 0;
+      });
+  }
 }
-  return filteredItems.sort((a, b) => {
-    const baseIdA = String(a.id).split('-')[0];
-    const baseIdB = String(b.id).split('-')[0];
-    if (baseIdA !== baseIdB) {
-      return Number(baseIdA) - Number(baseIdB);
-    }
-    if (!a.specialType && b.specialType) return -1;
-    if (a.specialType && !b.specialType) return 1;
-    if (a.specialType && b.specialType) {
-      return specialTypes.indexOf(a.specialType) - specialTypes.indexOf(b.specialType);
-    }
-    return 0;
-  });
+
+function toggleSortMenu(forceOpen) {
+  const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : sortMenu.classList.contains('hidden');
+  sortMenu.classList.toggle('hidden', !shouldOpen);
+  sortButton.setAttribute('aria-expanded', String(shouldOpen));
 }
+
+function closeSortMenu() {
+  sortMenu.classList.add('hidden');
+  sortButton.setAttribute('aria-expanded', 'false');
+}
+
+sortButton.addEventListener('click', () => {
+  toggleSortMenu();
+});
+
+document.addEventListener('click', (event) => {
+  if (!sortButton.contains(event.target) && !sortMenu.contains(event.target)) {
+    closeSortMenu();
+  }
+});
 
 function getAllItems() {
   return [...spirits, ...specials];
@@ -402,15 +471,26 @@ function getAllItems() {
 
 function render() {
   gridElement.innerHTML = '';
-  sortSelect.value = currentSort;
   sortItems(getAllItems()).forEach((item) => gridElement.appendChild(createCard(item)));
   dominatedCountElement.textContent = `${getDominatedCount()} dominados`;
   totalSpiritsElement.textContent = `${getTotalCount()} espiritus`;
   registeredCountElement.textContent = `${getRegisteredCount()} registrados`;
+  updateMenuUI();
 }
 
 function getItemById(id) {
   return String(id).includes('-') ? specials.find((item) => item.id === id) : spirits.find((item) => item.id === id);
+}
+
+function updateMenuUI() {
+  sortSelect.value = currentSort;
+  rarityFilterSelect.value = currentRarityFilter;
+  variantFilterSelect.value = currentVariantFilter;
+  statusFilterSelect.value = currentStatusFilter;
+
+  const activeFilters = [currentRarityFilter !== 'all', currentVariantFilter !== 'all', currentStatusFilter !== 'all', currentSort !== 'default'].filter(Boolean).length;
+  const buttonLabel = activeFilters > 0 ? `Filtros y orden (${activeFilters}) ▾` : 'Filtros y orden ▾';
+  sortButton.innerHTML = buttonLabel;
 }
 
 function updateLevel(id, change) {
@@ -427,6 +507,35 @@ function updateLevel(id, change) {
   saveState();
   render();
 }
+
+sortSelect.addEventListener('change', (event) => {
+  currentSort = event.target.value;
+  render();
+});
+
+rarityFilterSelect.addEventListener('change', (event) => {
+  currentRarityFilter = event.target.value;
+  render();
+});
+
+variantFilterSelect.addEventListener('change', (event) => {
+  currentVariantFilter = event.target.value;
+  render();
+});
+
+statusFilterSelect.addEventListener('change', (event) => {
+  currentStatusFilter = event.target.value;
+  render();
+});
+
+clearFiltersButton.addEventListener('click', () => {
+  currentSort = 'default';
+  currentRarityFilter = 'all';
+  currentVariantFilter = 'all';
+  currentStatusFilter = 'all';
+  render();
+  closeSortMenu();
+});
 
 function resetItem(id) {
   const item = getItemById(id);
@@ -451,10 +560,7 @@ resetAllButton.addEventListener('click', () => {
   }
 });
 
-sortSelect.addEventListener('change', () => {
-  currentSort = sortSelect.value;
-  render();
-});
+
 
 function capitalize(text) {
   if (!text) return text;

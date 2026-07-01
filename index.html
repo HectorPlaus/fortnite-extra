@@ -22,15 +22,56 @@
           </div>
         </div>
         <div class="sort-panel">
-          <label for="sortSelect">Ordenar por</label>
-          <select id="sortSelect">
-            <option value="default">Predeterminado</option>
-            <option value="registered">Registrados</option>
-            <option value="rarity">Rareza</option>
-            <option value="status">Dominados</option>
-            <option value="notRegistered">No registrados</option>
-            <option value="notDominated">No dominados</option>
-          </select>
+          <button id="sortButton" type="button" aria-expanded="false" aria-controls="sortMenu">
+            Filtros y orden ▾
+          </button>
+
+          <div id="sortMenu" class="hidden" role="dialog" aria-label="Panel de filtros y ordenación">
+            <div class="menu-section">
+              <h4>Ordenar por</h4>
+              <select id="sortSelect">
+                <option value="default">Predeterminado</option>
+                <option value="rarity">Rareza</option>
+                <option value="status">Estado</option>
+                <option value="variant">Variante</option>
+              </select>
+            </div>
+
+            <div class="menu-section">
+              <h4>Rareza</h4>
+              <select id="rarityFilterSelect">
+                <option value="all">Todas</option>
+                <option value="rare">Rare</option>
+                <option value="epic">Epic</option>
+                <option value="legendary">Legendary</option>
+                <option value="mythic">Mythic</option>
+              </select>
+            </div>
+
+            <div class="menu-section">
+              <h4>Variante</h4>
+              <select id="variantFilterSelect">
+                <option value="all">Todas</option>
+                <option value="base">Básicas</option>
+                <option value="gold">Oro</option>
+                <option value="gummy">Gummy</option>
+                <option value="galaxy">Galaxy</option>
+              </select>
+            </div>
+
+            <div class="menu-section">
+              <h4>Estado</h4>
+              <select id="statusFilterSelect">
+                <option value="all">Todos</option>
+                <option value="registered">Registrados</option>
+                <option value="notRegistered">No registrados</option>
+                <option value="dominated">Dominados</option>
+                <option value="notDominated">No dominados</option>
+              </select>
+            </div>
+
+            <button id="clearFiltersButton" type="button" class="secondary-action">Limpiar filtros</button>
+          </div>
         </div>
       </div>
     </header>
