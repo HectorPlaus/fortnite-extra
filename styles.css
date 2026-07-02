@@ -483,6 +483,157 @@ button:active {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
+.friend-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.friend-add {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.friend-add input {
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.friend-add button {
+  flex-shrink: 0;
+}
+
+.friend-filter-option,
+.friend-assignment-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.friend-filter-option:hover,
+.friend-assignment-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.friend-filter-option input,
+.friend-assignment-option input {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--primary);
+}
+
+.friend-filter-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friend-count {
+  display: inline-flex;
+  min-width: 24px;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(80, 250, 123, 0.16);
+  color: var(--text);
+  font-size: 0.82rem;
+}
+
+.delete-friend-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.delete-friend-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+}
+
+.friend-filter-dot,
+.friend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.friend-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.friend-hint {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 10px 8px;
+}
+
+.friend-assignment-panel {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.friend-assignment-title {
+  font-size: 0.92rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.friend-assignment-list {
+  display: grid;
+  gap: 8px;
+}
+
+.variant-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.variant-option input {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--primary);
+}
+
+.variant-filter-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
 .spirit-filter-name {
   display: none;
 }
@@ -555,6 +706,27 @@ button:active {
 
 .card.selected .card-hint {
   display: none;
+}
+
+.card-friends {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.friend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.card-friends::before {
+  content: 'Amigos:';
+  color: var(--text-muted);
+  font-size: 0.82rem;
 }
 
 .lost-btn,
@@ -735,6 +907,27 @@ button:disabled {
 
 .card-body {
   gap: 10px;
+}
+
+.card-friends {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.friend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.card-friends::before {
+  content: 'Amigos:';
+  color: var(--text-muted);
+  font-size: 0.82rem;
 }
 
 .meta-row {

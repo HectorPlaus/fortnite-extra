@@ -103,15 +103,20 @@ const sortMenu = document.getElementById('sortMenu');
 const sortSelect = document.getElementById('sortSelect');
 const spiritFilterOptions = document.getElementById('spiritFilterOptions');
 const variantFilterOptions = document.getElementById('variantFilterOptions');
+const friendNameInput = document.getElementById('friendNameInput');
+const addFriendButton = document.getElementById('addFriendButton');
+const friendFilterOptions = document.getElementById('friendFilterOptions');
 const clearFiltersButton = document.getElementById('clearFiltersButton');
 
 let specials = [];
 let spirits = [];
+let friends = [];
 let currentSort = 'default';
 let selectedSpirits = [];
 let selectedRarities = [];
 let selectedVariants = [];
 let selectedStatuses = [];
+let selectedFriendIds = [];
 let selectedItemId = null;
 
 function generateSpecials() {
@@ -139,13 +144,15 @@ function loadState() {
   if (stored) {
     try {
       const parsed = JSON.parse(stored);
+      friends = parsed.friends || [];
       spirits = baseSprites.map((base) => ({
         ...base,
         ...parsed.base?.[base.id],
         level: parsed.base?.[base.id]?.level ?? 1,
         lost: parsed.base?.[base.id]?.lost ?? false,
         register: parsed.base?.[base.id]?.register ?? false,
-        dominated: parsed.base?.[base.id]?.dominated ?? false
+        dominated: parsed.base?.[base.id]?.dominated ?? false,
+        wantedBy: parsed.base?.[base.id]?.wantedBy ?? []
       }));
       specials = generateSpecials().map((item) => ({
         ...item,
@@ -153,25 +160,28 @@ function loadState() {
         level: parsed.special?.[item.id]?.level ?? 1,
         lost: parsed.special?.[item.id]?.lost ?? false,
         register: parsed.special?.[item.id]?.register ?? false,
-        dominated: parsed.special?.[item.id]?.dominated ?? false
+        dominated: parsed.special?.[item.id]?.dominated ?? false,
+        wantedBy: parsed.special?.[item.id]?.wantedBy ?? []
       }));
       return;
     } catch (error) {
       console.warn('Error al leer estado guardado:', error);
     }
   }
-  spirits = baseSprites.map((base) => ({ ...base, level: 1, lost: false, register: false, dominated: false }));
+  spirits = baseSprites.map((base) => ({ ...base, level: 1, lost: false, register: false, dominated: false, wantedBy: [] }));
   specials = generateSpecials();
 }
 
 function saveState() {
   const payload = {
+    friends,
     base: spirits.reduce((acc, spirit) => {
       acc[spirit.id] = {
         level: spirit.level,
         lost: spirit.lost,
         register: spirit.register,
-        dominated: spirit.dominated
+        dominated: spirit.dominated,
+        wantedBy: spirit.wantedBy || []
       };
       return acc;
     }, {}),
@@ -180,7 +190,8 @@ function saveState() {
         level: spirit.level,
         lost: spirit.lost,
         register: spirit.register,
-        dominated: spirit.dominated
+        dominated: spirit.dominated,
+        wantedBy: spirit.wantedBy || []
       };
       return acc;
     }, {})
@@ -222,6 +233,19 @@ function createCard(item) {
   levelLabel.className = 'level-label';
   levelLabel.textContent = `Niv. ${item.level}`;
   header.appendChild(levelLabel);
+
+  if ((item.wantedBy || []).length > 0) {
+    const friendTags = document.createElement('div');
+    friendTags.className = 'friend-tags';
+    item.wantedBy.forEach((friendId) => {
+      const dot = document.createElement('span');
+      dot.className = 'friend-dot';
+      dot.style.background = getFriendColor(friendId);
+      dot.title = getFriendName(friendId);
+      friendTags.appendChild(dot);
+    });
+    header.appendChild(friendTags);
+  }
 
   let imageWrapper;
   if (item.image) {
@@ -305,6 +329,11 @@ function createCard(item) {
   resetButton.addEventListener('click', () => resetItem(item.id));
   footer.append(status, registerButton, resetButton);
 
+  if (String(item.id) === selectedItemId) {
+    const assignmentPanel = renderFriendAssignmentPanel(item);
+    if (assignmentPanel) body.appendChild(assignmentPanel);
+  }
+
   if (item.dominated) {
     const crown = document.createElement('span');
     crown.className = 'crown';
@@ -325,6 +354,9 @@ function createCard(item) {
   if (item.specialType) card.classList.add(`special-${item.specialType.toLowerCase()}`);
   if (!item.register) {
     card.classList.add('unregistered');
+  }
+  if ((item.wantedBy || []).length > 0) {
+    card.classList.add('wanted');
   }
   if (String(item.id) === selectedItemId) card.classList.add('selected');
 
@@ -388,7 +420,9 @@ function itemMatchesFilters(item) {
     }
   });
 
-  return matchesSpirit && matchesRarity && matchesVariant && matchesStatus;
+  const matchesFriends = selectedFriendIds.length === 0 || selectedFriendIds.some((friendId) => (item.wantedBy || []).includes(friendId));
+
+  return matchesSpirit && matchesRarity && matchesVariant && matchesStatus && matchesFriends;
 }
 
 function sortItems(items) {
@@ -526,6 +560,151 @@ function renderSpiritFilterOptions() {
   spiritFilterOptions.appendChild(fragment);
 }
 
+function renderFriendFilterOptions() {
+  friendFilterOptions.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+
+  if (friends.length === 0) {
+    const hint = document.createElement('div');
+    hint.className = 'friend-hint';
+    hint.textContent = 'Agrega un amigo para filtrar por él';
+    friendFilterOptions.appendChild(hint);
+    return;
+  }
+
+  friends.forEach((friend) => {
+    const count = getFriendCount(friend.id);
+    const label = document.createElement('label');
+    label.className = 'filter-option friend-filter-option';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = friend.id;
+    checkbox.setAttribute('data-filter-group', 'friend');
+    checkbox.checked = selectedFriendIds.includes(friend.id);
+
+    const color = document.createElement('span');
+    color.className = 'friend-filter-dot';
+    color.style.background = friend.color;
+    color.title = friend.name;
+
+    const name = document.createElement('span');
+    name.className = 'friend-filter-name';
+    name.textContent = friend.name;
+
+    const countBadge = document.createElement('span');
+    countBadge.className = 'friend-count';
+    countBadge.textContent = String(count);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'delete-friend-btn';
+    deleteButton.textContent = '✕';
+    deleteButton.title = `Eliminar ${friend.name}`;
+    deleteButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      removeFriend(friend.id);
+    });
+
+    label.append(checkbox, color, name, countBadge, deleteButton);
+    fragment.appendChild(label);
+  });
+
+  friendFilterOptions.appendChild(fragment);
+}
+
+function getFriendColor(friendId) {
+  return friends.find((friend) => friend.id === friendId)?.color || '#ffffff';
+}
+
+function getFriendName(friendId) {
+  return friends.find((friend) => friend.id === friendId)?.name || '';
+}
+
+function getFriendCount(friendId) {
+  return [...spirits, ...specials].filter((item) => (item.wantedBy || []).includes(friendId)).length;
+}
+
+function removeFriend(friendId) {
+  friends = friends.filter((friend) => friend.id !== friendId);
+  [...spirits, ...specials].forEach((item) => {
+    item.wantedBy = (item.wantedBy || []).filter((id) => id !== friendId);
+  });
+  selectedFriendIds = selectedFriendIds.filter((id) => id !== friendId);
+  saveState();
+  renderFriendFilterOptions();
+  render();
+}
+
+function addFriend() {
+  const name = friendNameInput.value.trim();
+  if (!name) return;
+
+  const friendId = `friend-${Date.now()}`;
+  const friend = {
+    id: friendId,
+    name,
+    color: `hsl(${Math.floor(Math.random() * 360)}, 80%, 65%)`
+  };
+
+  friends.push(friend);
+  friendNameInput.value = '';
+  renderFriendFilterOptions();
+  saveState();
+  render();
+}
+
+function renderFriendAssignmentPanel(item) {
+  if (friends.length === 0) return null;
+
+  const panel = document.createElement('div');
+  panel.className = 'friend-assignment-panel';
+  panel.addEventListener('click', (event) => event.stopPropagation());
+
+  const title = document.createElement('div');
+  title.className = 'friend-assignment-title';
+  title.textContent = 'Asignar a amigos';
+  panel.appendChild(title);
+
+  const list = document.createElement('div');
+  list.className = 'friend-assignment-list';
+
+  friends.forEach((friend) => {
+    const label = document.createElement('label');
+    label.className = 'filter-option friend-assignment-option';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = (item.wantedBy || []).includes(friend.id);
+    checkbox.addEventListener('click', (event) => event.stopPropagation());
+    checkbox.addEventListener('change', () => {
+      item.wantedBy = item.wantedBy || [];
+      if (checkbox.checked) {
+        if (!item.wantedBy.includes(friend.id)) item.wantedBy.push(friend.id);
+      } else {
+        item.wantedBy = item.wantedBy.filter((id) => id !== friend.id);
+      }
+      saveState();
+      renderFriendFilterOptions();
+      render();
+    });
+
+    const color = document.createElement('span');
+    color.className = 'friend-filter-dot';
+    color.style.background = friend.color;
+    color.title = friend.name;
+
+    const name = document.createElement('span');
+    name.textContent = friend.name;
+
+    label.append(checkbox, color, name);
+    list.appendChild(label);
+  });
+
+  panel.appendChild(list);
+  return panel;
+}
+
 function renderVariantFilterOptions() {
   variantFilterOptions.innerHTML = '';
   const fragment = document.createDocumentFragment();
@@ -565,7 +744,7 @@ function renderVariantFilterOptions() {
 
 function updateMenuUI() {
   sortSelect.value = currentSort;
-  const activeFilters = selectedSpirits.length + selectedRarities.length + selectedVariants.length + selectedStatuses.length;
+  const activeFilters = selectedSpirits.length + selectedRarities.length + selectedVariants.length + selectedStatuses.length + selectedFriendIds.length;
   const buttonLabel = activeFilters > 0 ? `Filtros y orden (${activeFilters}) ▾` : 'Filtros y orden ▾';
   sortButton.innerHTML = buttonLabel;
 }
@@ -595,6 +774,7 @@ sortMenu.addEventListener('change', () => {
   selectedRarities = getSelectedValues('rarity');
   selectedVariants = getSelectedValues('variant');
   selectedStatuses = getSelectedValues('status');
+  selectedFriendIds = getSelectedValues('friend');
   render();
 });
 
@@ -604,6 +784,7 @@ clearFiltersButton.addEventListener('click', () => {
   selectedRarities = [];
   selectedVariants = [];
   selectedStatuses = [];
+  selectedFriendIds = [];
   sortMenu.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
     checkbox.checked = false;
   });
@@ -644,4 +825,12 @@ function capitalize(text) {
 loadState();
 renderSpiritFilterOptions();
 renderVariantFilterOptions();
+renderFriendFilterOptions();
 render();
+
+addFriendButton.addEventListener('click', addFriend);
+friendNameInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    addFriend();
+  }
+});
