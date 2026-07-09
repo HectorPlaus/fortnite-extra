@@ -20,7 +20,7 @@ const baseSprites = [
   ];
 //https://fortnite.gg/img/x/sprites/crown.webp
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holographic'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
@@ -85,7 +85,7 @@ const specialTypeImages = {
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Galaxy_ui_L.webp'
   }
   ,
-  holographic: {
+  holo: {
     1:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Holofoil_ui_L.webp',
     3:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Holofoil_ui_L.webp',
     6:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Ghost_Holo_L.webp',
@@ -471,7 +471,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holographic: 4 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
