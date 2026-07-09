@@ -20,7 +20,7 @@ const baseSprites = [
   ];
 //https://fortnite.gg/img/x/sprites/crown.webp
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holographic'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
@@ -84,6 +84,14 @@ const specialTypeImages = {
     17: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Galaxy_L.webp',
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Galaxy_ui_L.webp'
   }
+  ,
+  holographic: {
+    1:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Holofoil_ui_L.webp',
+    3:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Holofoil_ui_L.webp',
+    6:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Ghost_Holo_L.webp',
+    7:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_King_Holofoil_ui_L.webp',
+    13:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Soccer_Holofoil_L.webp'
+    }
 };
 
 function getSpecialImageByType(spriteId, type) {
@@ -123,19 +131,24 @@ function generateSpecials() {
   return baseSprites
     .filter((sprite) => sprite.id !== 11)
     .flatMap((sprite) =>
-      specialTypes.map((type) => ({
-        id: `${sprite.id}-${type.toLowerCase()}`,
-        name: sprite.name,
-        specialType: type,
-        type: sprite.type,
-       // cost: sprite.cost,
-        rarity: sprite.rarity,
-        image: getSpecialImageByType(sprite.id, type) || sprite.image,
-        level: 1,
-        lost: false,
-        register: false,
-        dominated: false
-      }))
+      specialTypes.flatMap((type) => {
+        const typeKey = type.toLowerCase();
+        const specialImage = specialTypeImages[typeKey]?.[sprite.id];
+        // Sólo generar la variante si existe una imagen específica para ella
+        if (!specialImage) return [];
+        return {
+          id: `${sprite.id}-${typeKey}`,
+          name: sprite.name,
+          specialType: type,
+          type: sprite.type,
+          rarity: sprite.rarity,
+          image: specialImage,
+          level: 1,
+          lost: false,
+          register: false,
+          dominated: false
+        };
+      })
     );
 }
 
@@ -458,7 +471,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holographic: 4 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
@@ -708,18 +721,23 @@ function renderFriendAssignmentPanel(item) {
 function renderVariantFilterOptions() {
   variantFilterOptions.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  const earthSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'earth');
+  const miniatureSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'water');
 
-  if (!earthSprite) {
+  if (!miniatureSprite) {
     return;
   }
 
-  const variants = [
-    { value: 'base', image: earthSprite.image },
-    { value: 'gold', image: specialTypeImages.gold?.[earthSprite.id] || earthSprite.image },
-    { value: 'gummy', image: specialTypeImages.gummy?.[earthSprite.id] || earthSprite.image },
-    { value: 'galaxy', image: specialTypeImages.galaxy?.[earthSprite.id] || earthSprite.image }
-  ];
+  const variants = [];
+  // Siempre añadir la base
+  variants.push({ value: 'base', image: miniatureSprite.image });
+  // Añadir dinámicamente sólo las variantes que tengan imagen definida para este sprite
+  specialTypes.forEach((type) => {
+    const key = type.toLowerCase();
+    const img = specialTypeImages[key]?.[miniatureSprite.id];
+    if (img) {
+      variants.push({ value: key, image: img });
+    }
+  });
 
   variants.forEach((variant) => {
     const label = document.createElement('label');
