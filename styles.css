@@ -107,8 +107,86 @@ button:active {
   justify-items: stretch;
 }
 
+.grid.density-normal {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.grid.density-compact {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.grid.density-dense {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.grid.density-compact .card,
+.grid.density-dense .card {
+  padding: 18px;
+  gap: 12px;
+}
+
+.grid.density-compact .card-image,
+.grid.density-dense .card-image {
+  height: 120px;
+}
+
+.grid.density-dense .card-image {
+  height: 100px;
+}
+
+.grid.density-compact .card h2,
+.grid.density-dense .card h2 {
+  font-size: 1rem;
+}
+
+.grid.density-compact .badge,
+.grid.density-dense .badge {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+}
+
+.grid.density-compact .level-label,
+.grid.density-dense .level-label,
+.grid.density-compact .lost-btn,
+.grid.density-dense .lost-btn,
+.grid.density-compact .register-btn,
+.grid.density-dense .register-btn {
+  padding: 8px 10px;
+  font-size: 0.82rem;
+}
+
+.grid.density-compact .control-btn,
+.grid.density-dense .control-btn,
+.grid.density-compact .icon-btn,
+.grid.density-dense .icon-btn {
+  min-width: 40px;
+  padding: 10px 12px;
+}
+
+.grid.density-dense .control-btn,
+.grid.density-dense .icon-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 0.95rem;
+}
+
+.grid.density-compact .level-row,
+.grid.density-dense .level-row {
+  gap: 8px;
+}
+
+.grid.density-compact .card-footer,
+.grid.density-dense .card-footer {
+  gap: 10px;
+}
+
 @media (max-width: 500px) {
-  .grid {
+  .grid,
+  .grid.density-compact,
+  .grid.density-dense {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
@@ -696,16 +774,6 @@ button:active {
 
 .card.selected .card-body {
   display: grid;
-}
-
-.card-hint {
-  color: rgba(255, 255, 255, 0.68);
-  font-size: 0.88rem;
-  letter-spacing: 0.02em;
-}
-
-.card.selected .card-hint {
-  display: none;
 }
 
 .card-friends {

@@ -121,6 +121,7 @@ const sortMenu = document.getElementById('sortMenu');
 const sortSelect = document.getElementById('sortSelect');
 const spiritFilterOptions = document.getElementById('spiritFilterOptions');
 const variantFilterOptions = document.getElementById('variantFilterOptions');
+const densitySelect = document.getElementById('densitySelect');
 const friendNameInput = document.getElementById('friendNameInput');
 const addFriendButton = document.getElementById('addFriendButton');
 const friendFilterOptions = document.getElementById('friendFilterOptions');
@@ -130,6 +131,7 @@ let specials = [];
 let spirits = [];
 let friends = [];
 let currentSort = 'default';
+let currentDensity = 'normal';
 let selectedSpirits = [];
 let selectedRarities = [];
 let selectedVariants = [];
@@ -186,6 +188,7 @@ function loadState() {
         dominated: parsed.special?.[item.id]?.dominated ?? false,
         wantedBy: parsed.special?.[item.id]?.wantedBy ?? []
       }));
+      currentDensity = parsed.displayDensity || currentDensity;
       return;
     } catch (error) {
       console.warn('Error al leer estado guardado:', error);
@@ -198,6 +201,7 @@ function loadState() {
 function saveState() {
   const payload = {
     friends,
+    displayDensity: currentDensity,
     base: spirits.reduce((acc, spirit) => {
       acc[spirit.id] = {
         level: spirit.level,
@@ -254,7 +258,7 @@ function createCard(item) {
 
   const levelLabel = document.createElement('span');
   levelLabel.className = 'level-label';
-  levelLabel.textContent = `Niv. ${item.level}`;
+  levelLabel.textContent = item.level;
   header.appendChild(levelLabel);
 
   if ((item.wantedBy || []).length > 0) {
@@ -304,7 +308,7 @@ function createCard(item) {
   minusButton.addEventListener('click', () => updateLevel(item.id, -1));
   const levelValue = document.createElement('div');
   levelValue.className = `level-value${item.level === 5 ? ' dominated' : ''}`;
-  levelValue.textContent = `Nivel ${item.level}`;
+  levelValue.textContent = item.level;
   const plusButton = document.createElement('button');
   plusButton.className = 'control-btn';
   plusButton.textContent = '+';
@@ -366,11 +370,6 @@ function createCard(item) {
   }
   card.append(header);
   if (imageWrapper) card.appendChild(imageWrapper);
-
-  const hint = document.createElement('div');
-  hint.className = 'card-hint';
-  hint.textContent = 'Haz clic para editar';
-  card.appendChild(hint);
 
   card.appendChild(body);
   body.append(lostButton, levelRow, footer);
@@ -543,6 +542,7 @@ function getAllItems() {
 function render() {
   gridElement.innerHTML = '';
   sortItems(getAllItems()).forEach((item) => gridElement.appendChild(createCard(item)));
+  applyGridDensity();
   dominatedCountElement.textContent = `${getDominatedCount()} dominados`;
   totalSpiritsElement.textContent = `${getTotalCount()} espiritus`;
   registeredCountElement.textContent = `${getRegisteredCount()} registrados`;
@@ -772,9 +772,15 @@ function renderVariantFilterOptions() {
 
 function updateMenuUI() {
   sortSelect.value = currentSort;
+  densitySelect.value = currentDensity;
   const activeFilters = selectedSpirits.length + selectedRarities.length + selectedVariants.length + selectedStatuses.length + selectedFriendIds.length;
   const buttonLabel = activeFilters > 0 ? `Filtros y orden (${activeFilters}) ▾` : 'Filtros y orden ▾';
   sortButton.innerHTML = buttonLabel;
+}
+
+function applyGridDensity() {
+  gridElement.classList.remove('density-normal', 'density-compact', 'density-dense');
+  gridElement.classList.add(`density-${currentDensity}`);
 }
 
 function updateLevel(id, change) {
@@ -794,6 +800,12 @@ function updateLevel(id, change) {
 
 sortSelect.addEventListener('change', (event) => {
   currentSort = event.target.value;
+  render();
+});
+
+densitySelect.addEventListener('change', (event) => {
+  currentDensity = event.target.value;
+  saveState();
   render();
 });
 
