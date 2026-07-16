@@ -22,7 +22,7 @@ const baseSprites = [
   { id: 21, name: 'Pollo',  rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_CompanyStargazer_Default_L.webp' },
 
   ];
-//https://fortnite.gg/img/x/sprites/crown.webp
+//crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
 
 const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo'];
 
@@ -282,6 +282,13 @@ function createCard(item) {
     image.src = item.image;
     image.alt = item.name;
     imageWrapper.appendChild(image);
+
+    if (item.dominated) {
+      const crownOverlay = document.createElement('div');
+      crownOverlay.className = 'crown-overlay';
+      crownOverlay.innerHTML = '<img src="https://fortnite.gg/img/x/sprites/crown.webp" alt="Crown" />';
+      imageWrapper.appendChild(crownOverlay);
+    }
   }
 
   const body = document.createElement('div');
@@ -366,7 +373,7 @@ function createCard(item) {
     crown.className = 'crown';
     crown.textContent = '👑';
     //header.insertBefore(crown, cost);
-    header.prepend(crown);
+    // Retain el badge/level dentro del header, pero no mostrar el icono extra
   }
   card.append(header);
   if (imageWrapper) card.appendChild(imageWrapper);
