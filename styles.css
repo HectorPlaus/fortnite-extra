@@ -346,7 +346,7 @@ button:active {
 .crown-overlay {
   position: absolute;
   top: 0%;
-  left: 65%;
+  left: 64%;
   transform: translateX(-50%);
   width: 15%;
   height: 15%;
@@ -963,21 +963,28 @@ button:disabled {
 }
 
 .card-image {
-  width: 100%;
-  height: 110px;
-  overflow: hidden;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+    width: 100%;
+    height: 145px;       /* o la altura que quieras */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
 }
 
 .card-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* Muestra la imagen completa */
+    object-position: center;
+    display: block;
 
+    background: transparent;
+    filter: none;
+}
 .cost {
   color: var(--text-muted);
   font-size: 0.95rem;
