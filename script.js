@@ -15,21 +15,26 @@ const baseSprites = [
   { id: 14, name: 'Aura Sprite', rarity: 'epic', type: 'Aura', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Drifter_ui_L.webp' },
   { id: 15, name: 'Boss Sprite', rarity: 'legendary', type: 'Boss', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Boss_ui_L.webp' },
   { id: 16, name: 'Grim Reaper Sprite', rarity: 'mythic', type: 'Reaper', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Default_L.webp' },
-  { id: 17, name: 'Aire Sprite', rarity: 'rare', type: 'Elemental', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Default_L.webp' },
+  { id: 17, name: 'Air Sprite', rarity: 'rare', type: 'Elemental', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Default_L.webp' },
   { id: 18, name: 'Seven Sprite', rarity: 'legendary', type: 'Foundacion', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_ui_L.webp' },
   { id: 19, name: 'Batman', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Default_L.webp' },
   { id: 20, name: 'Vini Jr.', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_CokeParmesan_Default_L.webp' },
   { id: 21, name: 'Pollo', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_CompanyStargazer_Default_L.webp' },
+  { id: 22, name: 'John Wick', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_Reload_FillerGrunt_icon_L.webp' },
+  { id: 23, name: 'Llama', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_ui_L.webp' },
+  { id: 24, name: 'Peely', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_ui_L.webp' }
 
 ];
 //crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
 // 1 = Water Sprite, 2 = Earth Sprite, 3 = Fire Sprite, 4 = Duck Sprite, 5 = Demon Sprite,
-// 6 = Ghost Sprite, 7 = King Sprite, 8 = Punk Sprite, 9 = Dream Sprite.
+// 6 = Ghost Sprite, 7 = King Sprite, 8 = Punk Sprite, 9 = Dream Sprite, 
+// 10 = Zero Point Sprite, 12 = Fishy Sprite, 13 = Striker Sprite, 14 = Aura Sprite, 15 = Boss Sprite, 
+// 16 = Grim Reaper Sprite, 17 = Air Sprite, 18 = Seven Sprite, 19 = Batman
 const specialTypeImages = {
   gold: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/c/c8/Gold_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -49,7 +54,9 @@ const specialTypeImages = {
     16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Gold_L.webp',
     17: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Gold_L.webp',
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Gold_ui_L.webp',
-    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Gold_L.webp'
+    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Gold_L.webp',
+    23: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_Gold_ui_L.webp',
+    24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Gold_ui_L.webp'
   },
   gummy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/7/7b/Gummy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -69,7 +76,9 @@ const specialTypeImages = {
     16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Candy_L.webp',
     17: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Candy_L.webp',
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Candy_ui_L.webp',
-    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Candy_L.webp'
+    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Candy_L.webp',
+    23: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_Candy_ui_L.webp',
+    24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Candy_ui_L.webp'
   },
   galaxy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/4/43/Galaxy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -89,27 +98,40 @@ const specialTypeImages = {
     16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Galaxy_L.webp',
     17: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Galaxy_L.webp',
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Galaxy_ui_L.webp',
-    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Galaxy_L.webp'
+    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Galaxy_L.webp',
+    23: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_Galaxy_ui_L.webp',
+    24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Galaxy_ui_L.webp'
   },
   holo: {
     1: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Holofoil_ui_L.webp',
     3: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Holofoil_ui_L.webp',
     6: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Ghost_Holo_L.webp',
     7: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_King_Holofoil_ui_L.webp',
+    10: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Holofoil_ui_L.webp',
     13: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Soccer_Holofoil_L.webp',
+    16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Holofoil_L.webp',
     17: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Air_Holo_L.webp',
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Holofoil_ui_L.webp',
-    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Holofoil_L.webp'
+    19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Holofoil_L.webp',
+    24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Holofoil_ui_L.webp'
   },
   cube: {
     2: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Earth_Cube_ui_L.webp',
     3: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Cube_ui_L.webp',
     8: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Punk_Cube_ui_L.webp',
     9: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Sleepy_Cube_ui_L.webp',
+    10: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Cube_ui_L.webp',
     12: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fishy_Cube_L.webp',
     15: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Boss_Cube_ui_L.webp',
     16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Cube_L.webp',
     19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Cube_L.webp'
+  },
+  quack: {
+    1: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Quack_ui_L.webp',
+    2: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Earth_Quack_ui_L.webp',
+    3: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Quack_ui_L.webp',
+    10:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Quack_ui_L.webp'
+
   }
 
 };
@@ -497,7 +519,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
@@ -748,7 +770,7 @@ function renderFriendAssignmentPanel(item) {
 function renderVariantFilterOptions() {
   variantFilterOptions.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  const miniatureSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'batman');
+  const miniatureSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'fire');
 
   if (!miniatureSprite) {
     return;
