@@ -1144,6 +1144,18 @@ button:disabled {
 .card.special-galaxy {
   border-color: #9b5cff;
 }
+.card.special-holo {
+  border-color: #88cfeb;
+}
+.card.special-cube {
+  border-color: #210749;
+}
+.card.special-quack {
+  border-color: #638f9b;
+}
+.card.special-gem {
+  border-color: #cbd8d8;
+}
 
 .card.special-special {
   border: 1px solid transparent;
