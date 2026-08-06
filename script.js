@@ -22,12 +22,13 @@ const baseSprites = [
   { id: 21, name: 'Pollo', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_CompanyStargazer_Default_L.webp' },
   { id: 22, name: 'John Wick', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_Reload_FillerGrunt_icon_L.webp' },
   { id: 23, name: 'Llama', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_ui_L.webp' },
-  { id: 24, name: 'Peely', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_ui_L.webp' }
+  { id: 24, name: 'Peely', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_ui_L.webp' },
+  { id: 25, name: 'Ironmouse', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_PedicureAntacid_L.webp' }
 
 ];
 //crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
@@ -131,6 +132,17 @@ const specialTypeImages = {
     2: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Earth_Quack_ui_L.webp',
     3: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Quack_ui_L.webp',
     10:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Quack_ui_L.webp'
+
+  },
+  gem:{
+    1: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Gem_ui_L.webp',
+    2: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Earth_Gem_ui_L.webp',
+    4: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Duck_Gem_L.webp',
+    5: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_RedDemon_Gem_L.webp',
+    10: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Gem_ui_L.webp',
+    14: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Drifter_Gem_ui_L.webp',
+    16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Gem_L.webp',
+    23: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_Gem_ui_L.webp'
 
   }
 
@@ -767,22 +779,28 @@ function renderFriendAssignmentPanel(item) {
   return panel;
 }
 
+function getVariantIcon(typeKey) {
+  // Busca primero en Fire, y si no existe, usa cualquier espíritu que tenga la variante.
+  const fireSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'batman');
+  if (fireSprite && specialTypeImages[typeKey]?.[fireSprite.id]) {
+    return specialTypeImages[typeKey][fireSprite.id];
+  }
+  const fallbackSprite = baseSprites.find((sprite) => specialTypeImages[typeKey]?.[sprite.id]);
+  return fallbackSprite ? specialTypeImages[typeKey][fallbackSprite.id] : '';
+}
+
 function renderVariantFilterOptions() {
   variantFilterOptions.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  const miniatureSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'fire');
-
-  if (!miniatureSprite) {
-    return;
-  }
+  const representativeSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'batman') || baseSprites[0];
 
   const variants = [];
   // Siempre añadir la base
-  variants.push({ value: 'base', image: miniatureSprite.image });
-  // Añadir dinámicamente sólo las variantes que tengan imagen definida para este sprite
+  variants.push({ value: 'base', image: representativeSprite.image });
+  // Añadir todas las variantes con el icono de un espíritu que tenga esa variante definida
   specialTypes.forEach((type) => {
     const key = type.toLowerCase();
-    const img = specialTypeImages[key]?.[miniatureSprite.id];
+    const img = getVariantIcon(key);
     if (img) {
       variants.push({ value: key, image: img });
     }
