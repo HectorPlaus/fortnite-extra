@@ -403,7 +403,7 @@ button:active {
 .card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   flex-wrap: wrap;
 }
 .sort-panel{
@@ -683,8 +683,7 @@ button:active {
 .friend-tags {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: 10px;
+  gap: 2px;
 }
 
 .friend-hint {
