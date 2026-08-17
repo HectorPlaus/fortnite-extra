@@ -131,10 +131,10 @@ const specialTypeImages = {
     1: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Quack_ui_L.webp',
     2: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Earth_Quack_ui_L.webp',
     3: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Fire_Quack_ui_L.webp',
-    10:'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Quack_ui_L.webp'
+    10: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ZeroPoint_Quack_ui_L.webp'
 
   },
-  gem:{
+  gem: {
     1: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Water_Gem_ui_L.webp',
     2: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Earth_Gem_ui_L.webp',
     4: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Duck_Gem_L.webp',
@@ -213,7 +213,16 @@ function loadState() {
   if (stored) {
     try {
       const parsed = JSON.parse(stored);
+
       friends = parsed.friends || [];
+
+      currentSort = parsed.sort ?? currentSort;
+
+      selectedSpirits = parsed.filters?.spirits ?? [];
+      selectedRarities = parsed.filters?.rarities ?? [];
+      selectedVariants = parsed.filters?.variants ?? [];
+      selectedStatuses = parsed.filters?.statuses ?? [];
+      selectedFriendIds = parsed.filters?.friendIds ?? [];
       spirits = baseSprites.map((base) => ({
         ...base,
         ...parsed.base?.[base.id],
@@ -246,6 +255,16 @@ function saveState() {
   const payload = {
     friends,
     displayDensity: currentDensity,
+    sort: currentSort,
+
+    filters: {
+      spirits: selectedSpirits,
+      rarities: selectedRarities,
+      variants: selectedVariants,
+      statuses: selectedStatuses,
+      friendIds: selectedFriendIds
+    },
+
     base: spirits.reduce((acc, spirit) => {
       acc[spirit.id] = {
         level: spirit.level,
@@ -256,6 +275,7 @@ function saveState() {
       };
       return acc;
     }, {}),
+
     special: specials.reduce((acc, spirit) => {
       acc[spirit.id] = {
         level: spirit.level,
@@ -267,6 +287,7 @@ function saveState() {
       return acc;
     }, {})
   };
+
   localStorage.setItem(storageKey, JSON.stringify(payload));
 }
 
@@ -531,7 +552,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
@@ -617,6 +638,8 @@ function renderSpiritFilterOptions() {
     checkbox.type = 'checkbox';
     checkbox.value = value;
     checkbox.setAttribute('data-filter-group', 'spirit');
+    checkbox.checked = selectedSpirits.includes(value);
+    
 
     const thumb = document.createElement('img');
     thumb.className = 'spirit-filter-thumb';
@@ -857,6 +880,7 @@ function updateLevel(id, change) {
 
 sortSelect.addEventListener('change', (event) => {
   currentSort = event.target.value;
+  saveState();
   render();
 });
 
@@ -872,6 +896,7 @@ sortMenu.addEventListener('change', () => {
   selectedVariants = getSelectedValues('variant');
   selectedStatuses = getSelectedValues('status');
   selectedFriendIds = getSelectedValues('friend');
+  saveState();
   render();
 });
 
@@ -885,6 +910,7 @@ clearFiltersButton.addEventListener('click', () => {
   sortMenu.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
     checkbox.checked = false;
   });
+  saveState();
   render();
   closeSortMenu();
 });
