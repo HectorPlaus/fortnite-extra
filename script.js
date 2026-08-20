@@ -23,12 +23,29 @@ const baseSprites = [
   { id: 22, name: 'John Wick', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_Reload_FillerGrunt_icon_L.webp' },
   { id: 23, name: 'Llama', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_ui_L.webp' },
   { id: 24, name: 'Peely', rarity: 'legendary', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_ui_L.webp' },
-  { id: 25, name: 'Ironmouse', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_PedicureAntacid_L.webp' }
+  { id: 25, name: 'Ironmouse', rarity: 'mythic', type: 'Collab', image: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_PedicureAntacid_L.webp' },
+
+  { id: 26, name: "Bush", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_L.webp" },
+  { id: 27, name: "Adventure", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_L.webp" },
+  { id: 28, name: "Jonesy", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_L.webp" },
+  { id: 29, name: "8-Bit", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_L.webp" },
+  { id: 30, name: "Storm Scout", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_L.webp" },
+
+  { id: 31, name: "Shadow", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_L.webp" },
+  { id: 32, name: "Tails", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_L.webp" },
+  { id: 33, name: "Killswitch", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_L.webp" },
+  { id: 34, name: "Sonic", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_L.webp" },
+
+  { id: 35, name: "Jackrabbit", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_L.webp" },
+
+  { id: 36, name: "Klombo", rarity: "mythic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_L.webp" },
+  { id: 37, name: "Crown", rarity: "mythic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_L.webp" },
+
 
 ];
 //crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem', 'Cheat'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
@@ -57,7 +74,20 @@ const specialTypeImages = {
     18: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Seven_Gold_ui_L.webp',
     19: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_FossilMeal_Gold_L.webp',
     23: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_Gold_ui_L.webp',
-    24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Gold_ui_L.webp'
+    24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Gold_ui_L.webp',
+
+    35: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Gold_L.webp",
+    31:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Gold_L.webp" ,
+    26:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Gold_L.webp",
+    32:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Gold_L.webp" ,
+    33: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Gold_L.webp",
+    27:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Gold_L.webp",
+    36:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Gold_L.webp",
+    28: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Gold_L.webp",
+    34: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Gold_L.webp",
+    37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Gold_L.webp" ,
+    29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Gold_L.webp",
+    30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Gold_L.webp",
   },
   gummy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/7/7b/Gummy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -144,7 +174,25 @@ const specialTypeImages = {
     16: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_GrimReaper_Gem_L.webp',
     23: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Llama_Gem_ui_L.webp'
 
+  },
+  cheat: {
+
+    35: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Cheatmaster_L.webp",
+    31: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Cheatmaster_L.webp",
+    26: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Cheatmaster_L.webp",
+    32: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Cheatmaster_L.webp",
+    33: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Cheatmaster_L.webp",
+    27: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Cheatmaster_L.webp",
+    36: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Cheatmaster_L.webp",
+    28: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Cheatmaster_L.webp",
+    34: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Cheatmaster_L.webp",
+    37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Cheatmaster_L.webp",
+    29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Cheatmaster_L.webp",
+    30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp"
+
+
   }
+
 
 };
 
@@ -552,7 +600,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7, cheat:8 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
@@ -639,7 +687,7 @@ function renderSpiritFilterOptions() {
     checkbox.value = value;
     checkbox.setAttribute('data-filter-group', 'spirit');
     checkbox.checked = selectedSpirits.includes(value);
-    
+
 
     const thumb = document.createElement('img');
     thumb.className = 'spirit-filter-thumb';
