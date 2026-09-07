@@ -41,11 +41,19 @@ const baseSprites = [
   { id: 36, name: "Klombo", rarity: "mythic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_L.webp" },
   { id: 37, name: "Crown", rarity: "mythic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_L.webp" },
 
+  { id: 38, name: "Storm Scout", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_L.webp" },
+
+  { id: 39, name: "Mega Man", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ImprovedSlide_L.webp" },
+  { id: 40, name: "Overshield", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_L.webp" },
+  { id: 41, name: "X-Ray", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_L.webp" },
+  { id: 42, name: "Onigiri", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_L.webp" }
+
+
 
 ];
 //crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem', 'Cheat'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem', 'Cheat', 'Hack'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
@@ -88,6 +96,11 @@ const specialTypeImages = {
     37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Gold_L.webp" ,
     29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Gold_L.webp",
     30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Gold_L.webp",
+
+    38: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Gold_L.webp",
+    40: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Gold_L.webp",
+    41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Gold_L.webp",
+    42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Gold_L.webp"
   },
   gummy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/7/7b/Gummy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -188,9 +201,17 @@ const specialTypeImages = {
     34: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Cheatmaster_L.webp",
     37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Cheatmaster_L.webp",
     29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Cheatmaster_L.webp",
-    30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp"
+    30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp",
+
+    38: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp",
+    40: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Cheatmaster_L.webp",
+    41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Cheatmaster_L.webp",
+    42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Cheatmaster_L.webp"
 
 
+  },
+  hack: {
+    37:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp"
   }
 
 
@@ -218,12 +239,14 @@ const friendNameInput = document.getElementById('friendNameInput');
 const addFriendButton = document.getElementById('addFriendButton');
 const friendFilterOptions = document.getElementById('friendFilterOptions');
 const clearFiltersButton = document.getElementById('clearFiltersButton');
+const seasonFilterOptions = document.getElementById('seasonFilterOptions');
 
 let specials = [];
 let spirits = [];
 let friends = [];
 let currentSort = 'default';
 let currentDensity = 'normal';
+let selectedSeason = [];
 let selectedSpirits = [];
 let selectedRarities = [];
 let selectedVariants = [];
@@ -266,6 +289,7 @@ function loadState() {
 
       currentSort = parsed.sort ?? currentSort;
 
+      selectedSeason = parsed.filters?.seasons ?? parsed.filters?.season ?? [];
       selectedSpirits = parsed.filters?.spirits ?? [];
       selectedRarities = parsed.filters?.rarities ?? [];
       selectedVariants = parsed.filters?.variants ?? [];
@@ -306,6 +330,7 @@ function saveState() {
     sort: currentSort,
 
     filters: {
+      seasons: selectedSeason,
       spirits: selectedSpirits,
       rarities: selectedRarities,
       variants: selectedVariants,
@@ -531,11 +556,16 @@ function normalizeSpiritValue(name) {
   return (name || '').replace(/\s+Sprite$/i, '').trim().toLowerCase();
 }
 
+function getSeason(item) {
+  return item.season || ((item.type || '').toLowerCase() === 'season4' ? 'S4' : 'S3');
+}
+
 function getSelectedValues(groupName) {
   return Array.from(sortMenu.querySelectorAll(`input[type="checkbox"][data-filter-group="${groupName}"]:checked`)).map((input) => input.value);
 }
 
 function itemMatchesFilters(item) {
+  const matchesSeason = selectedSeason.length === 0 || selectedSeason.includes(getSeason(item));
   const matchesSpirit = selectedSpirits.length === 0 || selectedSpirits.includes(normalizeSpiritValue(item.name));
 
   const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes((item.rarity || '').toLowerCase());
@@ -564,7 +594,7 @@ function itemMatchesFilters(item) {
 
   const matchesFriends = selectedFriendIds.length === 0 || selectedFriendIds.some((friendId) => (item.wantedBy || []).includes(friendId));
 
-  return matchesSpirit && matchesRarity && matchesVariant && matchesStatus && matchesFriends;
+  return matchesSeason && matchesSpirit && matchesRarity && matchesVariant && matchesStatus && matchesFriends;
 }
 
 function sortItems(items) {
@@ -600,7 +630,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7, cheat:8 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7, cheat:8, hack:9 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
@@ -676,8 +706,12 @@ function getItemById(id) {
 function renderSpiritFilterOptions() {
   spiritFilterOptions.innerHTML = '';
   const fragment = document.createDocumentFragment();
+  syncSpiritSelection();
+  const visibleSprites = selectedSeason.length === 0
+    ? baseSprites
+    : baseSprites.filter((sprite) => selectedSeason.includes(getSeason(sprite)));
 
-  baseSprites.forEach((sprite) => {
+  visibleSprites.forEach((sprite) => {
     const value = normalizeSpiritValue(sprite.name);
     const label = document.createElement('label');
     label.className = 'filter-option spirit-option';
@@ -703,6 +737,52 @@ function renderSpiritFilterOptions() {
   });
 
   spiritFilterOptions.appendChild(fragment);
+}
+
+function syncSpiritSelection() {
+  const availableSpirits = new Set(
+    baseSprites
+      .filter((sprite) => selectedSeason.length === 0 || selectedSeason.includes(getSeason(sprite)))
+      .map((sprite) => normalizeSpiritValue(sprite.name))
+  );
+  selectedSpirits = selectedSpirits.filter((spirit) => availableSpirits.has(spirit));
+}
+
+function renderSeasonFilterOptions() {
+  seasonFilterOptions.innerHTML = '';
+  const seasons = [...new Set(baseSprites.map(getSeason))].sort();
+  const fragment = document.createDocumentFragment();
+
+  seasons.forEach((season) => {
+    const label = document.createElement('label');
+    label.className = 'filter-option';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = season;
+    checkbox.checked = selectedSeason.includes(season);
+    checkbox.setAttribute('data-filter-group', 'season');
+
+    label.append(checkbox, document.createTextNode(season));
+    fragment.appendChild(label);
+  });
+
+  seasonFilterOptions.appendChild(fragment);
+}
+
+function getAvailableVariantKeys() {
+  const sprites = selectedSeason.length === 0
+    ? baseSprites
+    : baseSprites.filter((sprite) => selectedSeason.includes(getSeason(sprite)));
+
+  return specialTypes
+    .map((type) => type.toLowerCase())
+    .filter((typeKey) => sprites.some((sprite) => specialTypeImages[typeKey]?.[sprite.id]));
+}
+
+function syncVariantSelection() {
+  const availableVariants = new Set(getAvailableVariantKeys());
+  selectedVariants = selectedVariants.filter((variant) => variant === 'base' || availableVariants.has(variant));
 }
 
 function renderFriendFilterOptions() {
@@ -863,17 +943,20 @@ function getVariantIcon(typeKey) {
 function renderVariantFilterOptions() {
   variantFilterOptions.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  const representativeSprite = baseSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'batman') || baseSprites[0];
+  syncVariantSelection();
+  const availableSprites = selectedSeason.length === 0
+    ? baseSprites
+    : baseSprites.filter((sprite) => selectedSeason.includes(getSeason(sprite)));
+  const representativeSprite = availableSprites.find((sprite) => normalizeSpiritValue(sprite.name) === 'batman') || availableSprites[0] || baseSprites[0];
 
   const variants = [];
   // Siempre añadir la base
   variants.push({ value: 'base', image: representativeSprite.image });
-  // Añadir todas las variantes con el icono de un espíritu que tenga esa variante definida
-  specialTypes.forEach((type) => {
-    const key = type.toLowerCase();
-    const img = getVariantIcon(key);
-    if (img) {
-      variants.push({ value: key, image: img });
+  // Mostrar solo variantes disponibles en las temporadas seleccionadas
+  getAvailableVariantKeys().forEach((key) => {
+    const representativeVariant = availableSprites.find((sprite) => specialTypeImages[key]?.[sprite.id]);
+    if (representativeVariant) {
+      variants.push({ value: key, image: specialTypeImages[key][representativeVariant.id] });
     }
   });
 
@@ -884,6 +967,7 @@ function renderVariantFilterOptions() {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.value = variant.value;
+    checkbox.checked = selectedVariants.includes(variant.value);
     checkbox.setAttribute('data-filter-group', 'variant');
 
     const thumb = document.createElement('img');
@@ -901,7 +985,7 @@ function renderVariantFilterOptions() {
 function updateMenuUI() {
   sortSelect.value = currentSort;
   densitySelect.value = currentDensity;
-  const activeFilters = selectedSpirits.length + selectedRarities.length + selectedVariants.length + selectedStatuses.length + selectedFriendIds.length;
+  const activeFilters = selectedSeason.length + selectedSpirits.length + selectedRarities.length + selectedVariants.length + selectedStatuses.length + selectedFriendIds.length;
   const buttonLabel = activeFilters > 0 ? `Filtros y orden (${activeFilters}) ▾` : 'Filtros y orden ▾';
   sortButton.innerHTML = buttonLabel;
 }
@@ -939,17 +1023,23 @@ densitySelect.addEventListener('change', (event) => {
 });
 
 sortMenu.addEventListener('change', () => {
+  selectedSeason = getSelectedValues('season');
   selectedSpirits = getSelectedValues('spirit');
   selectedRarities = getSelectedValues('rarity');
   selectedVariants = getSelectedValues('variant');
   selectedStatuses = getSelectedValues('status');
   selectedFriendIds = getSelectedValues('friend');
+  syncSpiritSelection();
+  syncVariantSelection();
+  renderSpiritFilterOptions();
+  renderVariantFilterOptions();
   saveState();
   render();
 });
 
 clearFiltersButton.addEventListener('click', () => {
   currentSort = 'default';
+  selectedSeason = [];
   selectedSpirits = [];
   selectedRarities = [];
   selectedVariants = [];
@@ -993,7 +1083,17 @@ function capitalize(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
+function setRandomTabIcon() {
+  const tabIcon = document.getElementById('tabIcon');
+  if (!tabIcon || baseSprites.length === 0) return;
+
+  const randomSpirit = baseSprites[Math.floor(Math.random() * baseSprites.length)];
+  tabIcon.href = randomSpirit.image;
+}
+
+setRandomTabIcon();
 loadState();
+renderSeasonFilterOptions();
 renderSpiritFilterOptions();
 renderVariantFilterOptions();
 renderFriendFilterOptions();

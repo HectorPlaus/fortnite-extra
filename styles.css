@@ -1155,6 +1155,9 @@ button:disabled {
 .card.special-gem {
   border-color: #cbd8d8;
 }
+.card.special-cheat{
+  border-color: rgb(0, 175, 53);
+}
 
 .card.special-special {
   border: 1px solid transparent;
