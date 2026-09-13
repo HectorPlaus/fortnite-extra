@@ -210,7 +210,21 @@ const specialTypeImages = {
 
   },
   hack: {
-    37:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp"
+    26:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Hacker_L.webp",
+    27:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Hacker_L.webp",
+    28:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Hacker_L.webp",
+    29:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Hacker_L.webp",
+    30:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Hacker_L.webp",
+    31:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_Hacker_L.webp",
+    32:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Hacker_L.webp",
+    33:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Hacker_L.webp",
+    34:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Hacker_L.webp",
+    35:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_Hacker_L.webp",
+    36:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Hacker_L.webp",
+    37:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp",
+    41:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Hacker_L.webp",
+    42:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Hacker_L.webp",
+    43:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Hacker_L.webp",
   }
 
 
@@ -364,14 +378,20 @@ function saveState() {
 }
 
 function getDominatedCount() {
-  return [...spirits, ...specials].filter((item) => item.dominated).length;
+  return getSeasonFilteredItems().filter((item) => item.dominated).length;
 }
 function getRegisteredCount() {
-  return [...spirits, ...specials].filter((item) => item.register).length;
+  return getSeasonFilteredItems().filter((item) => item.register).length;
 }
 
 function getTotalCount() {
-  return spirits.length + specials.length;
+  return getSeasonFilteredItems().length;
+}
+
+function getSeasonFilteredItems() {
+  return [...spirits, ...specials].filter((item) => (
+    selectedSeason.length === 0 || selectedSeason.includes(getSeason(item))
+  ));
 }
 
 function createCard(item) {
