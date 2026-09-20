@@ -45,7 +45,11 @@ const baseSprites = [
   { id: 40, name: "Mega Man", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ImprovedSlide_L.webp" },
   { id: 41, name: "Overshield", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_L.webp" },
   { id: 42, name: "X-Ray", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_L.webp" },
-  { id: 43, name: "Onigiri", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_L.webp" }
+  { id: 43, name: "Onigiri", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_L.webp" },
+
+  { id: 44, name: "Blinky", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_L.webp" },
+  { id: 45, name: "Crash Bandicoot", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_L.webp"},
+  { id: 46, name: "Pond", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_L.webp"}
 
 
 
@@ -99,7 +103,11 @@ const specialTypeImages = {
    
     41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Gold_L.webp",
     42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Gold_L.webp",
-    43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Gold_L.webp"
+    43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Gold_L.webp",
+
+    44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Gold_L.webp",
+    45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Gold_L.webp",
+    46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Gold_L.webp"
   },
   gummy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/7/7b/Gummy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -205,7 +213,11 @@ const specialTypeImages = {
    
     41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Cheatmaster_L.webp",
     42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Cheatmaster_L.webp",
-    43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Cheatmaster_L.webp"
+    43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Cheatmaster_L.webp",
+
+  44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Cheatmaster_L.webp",
+  45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Cheatmaster_L.webp",
+  46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Cheatmaster_L.webp"
 
 
   },
@@ -225,6 +237,10 @@ const specialTypeImages = {
     41:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Hacker_L.webp",
     42:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Hacker_L.webp",
     43:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Hacker_L.webp",
+
+  44:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Hacker_L.webp",
+  45:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Hacker_L.webp",
+  46:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Hacker_L.webp"
   }
 
 
