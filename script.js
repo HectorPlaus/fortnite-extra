@@ -63,7 +63,9 @@ const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem',
 // 1 = Water Sprite, 2 = Earth Sprite, 3 = Fire Sprite, 4 = Duck Sprite, 5 = Demon Sprite,
 // 6 = Ghost Sprite, 7 = King Sprite, 8 = Punk Sprite, 9 = Dream Sprite, 
 // 10 = Zero Point Sprite, 12 = Fishy Sprite, 13 = Striker Sprite, 14 = Aura Sprite, 15 = Boss Sprite, 
-// 16 = Grim Reaper Sprite, 17 = Air Sprite, 18 = Seven Sprite, 19 = Batman
+// 16 = Grim Reaper Sprite, 17 = Air Sprite, 18 = Seven Sprite, 19 = Batman, 20 = Vini Jr., 21 = Pollo, 22 = John Wick, 23 = Llama, 24 = Peely, 25 = Ironmouse
+// 26 = Bush, 27 = Adventure, 28 = Jonesy, 29 = 8-Bit, 30 = Storm Scout, 31 = Shadow, 32 = Tails, 33 = Killswitch, 34 = Sonic, 35 = Jackrabbit, 36 = Klombo, 37 = Crown
+// 40 = Mega Man, 41 = Overshield, 42 = X-Ray, 43 = Onigiri, 44 = Blinky, 45 = Crash Bandicoot, 46 = Pond
 const specialTypeImages = {
   gold: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/c/c8/Gold_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -252,6 +254,9 @@ function getSpecialImageByType(spriteId, type) {
 }
 
 const rarityOrder = { mythic: 0, legendary: 1, epic: 2, rare: 3, common: 4, special: 5 };
+// 26 = Bush, 27 = Adventure, 28 = Jonesy, 29 = 8-Bit, 30 = Storm Scout, 31 = Shadow, 32 = Tails, 33 = Killswitch, 34 = Sonic, 35 = Jackrabbit, 36 = Klombo, 37 = Crown
+// 40 = Mega Man, 41 = Overshield, 42 = X-Ray, 43 = Onigiri, 44 = Blinky, 45 = Crash Bandicoot, 46 = Pond
+const fortniteOrder = [28,27,26,34,32,31,29,35,37,33,36,40,41,46,42,43,30,44,45];
 const storageKey = 'fortnite-espiritus-state';
 const gridElement = document.getElementById('spiritGrid');
 const resetAllButton = document.getElementById('resetAll');
@@ -638,6 +643,29 @@ function sortItems(items) {
   const sorted = [...filteredItems];
 
   switch (currentSort) {
+    case 'fortnite':
+      return sorted.sort((a, b) => {
+        const baseIdA = Number(String(a.id).split('-')[0]);
+        const baseIdB = Number(String(b.id).split('-')[0]);
+        const rankA = fortniteOrder.indexOf(baseIdA);
+        const rankB = fortniteOrder.indexOf(baseIdB);
+        const normalizedRankA = rankA === -1 ? fortniteOrder.length + baseIdA : rankA;
+        const normalizedRankB = rankB === -1 ? fortniteOrder.length + baseIdB : rankB;
+
+        if (normalizedRankA !== normalizedRankB) {
+          return normalizedRankA - normalizedRankB;
+        }
+
+        if (!a.specialType && b.specialType) return -1;
+        if (a.specialType && !b.specialType) return 1;
+
+        if (a.specialType && b.specialType) {
+          return specialTypes.indexOf(a.specialType) - specialTypes.indexOf(b.specialType);
+        }
+
+        return 0;
+      });
+
     case 'rarity':
       return sorted.sort((a, b) => {
         const rankA = rarityOrder[a.rarity || 'common'];
