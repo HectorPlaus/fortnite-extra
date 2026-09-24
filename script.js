@@ -48,15 +48,15 @@ const baseSprites = [
   { id: 43, name: "Onigiri", rarity: "rare", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_L.webp" },
 
   { id: 44, name: "Blinky", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_L.webp" },
-  { id: 45, name: "Crash Bandicoot", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_L.webp"},
-  { id: 46, name: "Pond", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_L.webp"}
-
+  { id: 45, name: "Crash Bandicoot", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_L.webp" },
+  { id: 46, name: "Pond", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_L.webp" },
+  { id: 47, name: "Morgana", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_L.webp" }
 
 
 ];
 //crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
 
-const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem', 'Cheat', 'Hack'];
+const specialTypes = ['Gold', 'Gummy', 'Galaxy', 'Holo', 'Cube', 'Quack', 'Gem', 'Cheat', 'Hack', 'Bounty'];
 
 // Coloca aquí los enlaces de imagen específicos para cada base y cada tipo especial.
 // Usa el ID del espíritu base como clave:
@@ -90,26 +90,27 @@ const specialTypeImages = {
     24: 'https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Peely_Gold_ui_L.webp',
 
     35: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Gold_L.webp",
-    31:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Gold_L.webp" ,
-    26:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Gold_L.webp",
-    32:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Gold_L.webp" ,
+    31: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Gold_L.webp",
+    26: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Gold_L.webp",
+    32: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Gold_L.webp",
     33: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Gold_L.webp",
-    27:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Gold_L.webp",
-    36:  "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Gold_L.webp",
+    27: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Gold_L.webp",
+    36: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Gold_L.webp",
     28: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Gold_L.webp",
     34: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Gold_L.webp",
-    37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Gold_L.webp" ,
+    37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Gold_L.webp",
     29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Gold_L.webp",
     30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Gold_L.webp",
 
-   
+
     41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Gold_L.webp",
     42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Gold_L.webp",
     43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Gold_L.webp",
 
     44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Gold_L.webp",
     45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Gold_L.webp",
-    46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Gold_L.webp"
+    46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Gold_L.webp",
+    47: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Gold_L.webp"
   },
   gummy: {
     1: 'https://static.wikia.nocookie.net/fortnite/images/7/7b/Gummy_Water_Sprite_-_Item_-_Fortnite.png/revision/latest?cb=20260606185046',
@@ -212,37 +213,63 @@ const specialTypeImages = {
     29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Cheatmaster_L.webp",
     30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp",
 
-   
+
     41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Cheatmaster_L.webp",
     42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Cheatmaster_L.webp",
     43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Cheatmaster_L.webp",
 
-  44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Cheatmaster_L.webp",
-  45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Cheatmaster_L.webp",
-  46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Cheatmaster_L.webp"
+    44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Cheatmaster_L.webp",
+    45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Cheatmaster_L.webp",
+    46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Cheatmaster_L.webp",
+    47: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Cheatmaster_L.webp"
 
 
   },
   hack: {
-    26:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Hacker_L.webp",
-    27:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Hacker_L.webp",
-    28:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Hacker_L.webp",
-    29:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Hacker_L.webp",
-    30:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Hacker_L.webp",
-    31:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_Hacker_L.webp",
-    32:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Hacker_L.webp",
-    33:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Hacker_L.webp",
-    34:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Hacker_L.webp",
-    35:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_Hacker_L.webp",
-    36:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Hacker_L.webp",
-    37:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp",
-    41:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Hacker_L.webp",
-    42:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Hacker_L.webp",
-    43:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Hacker_L.webp",
+    26: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Hacker_L.webp",
+    27: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Hacker_L.webp",
+    28: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Hacker_L.webp",
+    29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_BountyHunter_L.webp",
+    30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Hacker_L.webp",
+    31: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_Hacker_L.webp",
+    32: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_BountyHunter_L.webp",
+    33: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Hacker_L.webp",
+    34: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Hacker_L.webp",
+    35: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_Hacker_L.webp",
+    36: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Hacker_L.webp",
+    37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp",
+    41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Hacker_L.webp",
+    42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Hacker_L.webp",
+    43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Hacker_L.webp",
 
-  44:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Hacker_L.webp",
-  45:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Hacker_L.webp",
-  46:"https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Hacker_L.webp"
+    44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Hacker_L.webp",
+    45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Hacker_L.webp",
+    46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Hacker_L.webp",
+    47: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Hacker_L.webp"
+  },
+
+  bounty: {
+
+    26: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_BountyHunter_L.webp",
+    27: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_BountyHunter_L.webp",
+    28: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_BountyHunter_L.webp",
+    29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_BountyHunter_L.webp",
+    30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_BountyHunter_L.webp",
+    31: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_BountyHunter_L.webp",
+    32: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_BountyHunter_L.webp",
+    33: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_BountyHunter_L.webp",
+    34: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_BountyHunter_L.webp",
+    35: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_BountyHunter_L.webp",
+    36: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_BountyHunter_L.webp",
+    37: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_BountyHunter_L.webp",
+    41: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_BountyHunter_L.webp",
+    42: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_BountyHunter_L.webp",
+    43: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_BountyHunter_L.webp",
+
+    44: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_BountyHunter_L.webp",
+    45: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_BountyHunter_L.webp",
+    46: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_BountyHunter_L.webp",
+    47: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_BountyHunter_L.webp"
   }
 
 
@@ -255,8 +282,8 @@ function getSpecialImageByType(spriteId, type) {
 
 const rarityOrder = { mythic: 0, legendary: 1, epic: 2, rare: 3, common: 4, special: 5 };
 // 26 = Bush, 27 = Adventure, 28 = Jonesy, 29 = 8-Bit, 30 = Storm Scout, 31 = Shadow, 32 = Tails, 33 = Killswitch, 34 = Sonic, 35 = Jackrabbit, 36 = Klombo, 37 = Crown
-// 40 = Mega Man, 41 = Overshield, 42 = X-Ray, 43 = Onigiri, 44 = Blinky, 45 = Crash Bandicoot, 46 = Pond
-const fortniteOrder = [28,27,26,34,32,31,29,35,37,33,36,40,41,46,42,43,30,44,45];
+// 40 = Mega Man, 41 = Overshield, 42 = X-Ray, 43 = Onigiri, 44 = Blinky, 45 = Crash Bandicoot, 46 = Pond, 47 = Morgana
+const fortniteOrder = [28, 27, 26, 34, 32, 31, 29, 35, 37, 33, 36, 40, 41, 46, 42, 43, 30, 44, 45, 47];
 const storageKey = 'fortnite-espiritus-state';
 const gridElement = document.getElementById('spiritGrid');
 const resetAllButton = document.getElementById('resetAll');
@@ -693,7 +720,7 @@ function sortItems(items) {
 
     case 'variant':
       return sorted.sort((a, b) => {
-        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7, cheat:8, hack:9 };
+        const variantRank = { base: 0, gold: 1, gummy: 2, galaxy: 3, holo: 4, cube: 5, quack: 6, gem: 7, cheat: 8, hack: 9, bounty: 10 };
         const variantA = (a.specialType || 'base').toLowerCase();
         const variantB = (b.specialType || 'base').toLowerCase();
         const rankA = variantRank[variantA] ?? 0;
