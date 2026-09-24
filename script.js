@@ -229,7 +229,7 @@ const specialTypeImages = {
     26: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Hacker_L.webp",
     27: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Hacker_L.webp",
     28: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Hacker_L.webp",
-    29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_BountyHunter_L.webp",
+    29: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Hacker_L.webp",
     30: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Hacker_L.webp",
     31: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_Hacker_L.webp",
     32: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_BountyHunter_L.webp",
@@ -624,7 +624,7 @@ function normalizeSpiritValue(name) {
 }
 
 function getSeason(item) {
-  return item.season || ((item.type || '').toLowerCase() === 'season4' ? 'S4' : 'S3');
+  return item.season || ((item.type || '').toLowerCase() === 'season4' ? 'C7S4' : 'C7S3');
 }
 
 function getSelectedValues(groupName) {
