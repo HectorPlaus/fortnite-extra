@@ -184,6 +184,7 @@ button:active {
 }
 
 @media (max-width: 500px) {
+
   .grid,
   .grid.density-compact,
   .grid.density-dense {
@@ -406,8 +407,9 @@ button:active {
   gap: 5px;
   flex-wrap: wrap;
 }
-.sort-panel{
-    position:relative;
+
+.sort-panel {
+  position: relative;
 }
 
 #sortButton {
@@ -962,28 +964,31 @@ button:disabled {
 }
 
 .card-image {
-    width: 100%;
-    height: 145px;       /* o la altura que quieras */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  width: 100%;
+  height: 145px;
+  /* o la altura que quieras */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 
-    background: transparent;
-    border: none;
-    border-radius: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;   /* Muestra la imagen completa */
-    object-position: center;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Muestra la imagen completa */
+  object-position: center;
+  display: block;
 
-    background: transparent;
-    filter: none;
+  background: transparent;
+  filter: none;
 }
+
 .cost {
   color: var(--text-muted);
   font-size: 0.95rem;
@@ -1143,27 +1148,34 @@ button:disabled {
 .card.special-galaxy {
   border-color: #9b5cff;
 }
+
 .card.special-holo {
   border-color: #88cfeb;
 }
+
 .card.special-cube {
   border-color: #210749;
 }
+
 .card.special-quack {
   border-color: #638f9b;
 }
+
 .card.special-gem {
   border-color: #cbd8d8;
 }
-.card.special-cheat{
+
+.card.special-cheat {
   border-color: rgb(0, 175, 53);
 }
+
 .card.special-hack {
   border-color: #0066ff;
 }
+
 .card.special-bounty {
   border-color: #a50089;
-  
+
 }
 
 .card.special-special {
@@ -1311,7 +1323,7 @@ button:disabled {
   border-bottom: 1px solid var(--border);
 }
 
-.catalog-search-label + input {
+.catalog-search-label+input {
   flex: 1 1 220px;
 }
 
@@ -1497,7 +1509,6 @@ button:disabled {
 
 .cosmetic-card-content {
   display: flex;
-  min-height: 112px;
   flex: 1;
   flex-direction: column;
   gap: 6px;
@@ -1914,11 +1925,11 @@ button:disabled {
 }
 
 .cosmetic-detail-variant strong,
-.cosmetic-detail-variant > span {
+.cosmetic-detail-variant>span {
   overflow-wrap: anywhere;
 }
 
-.cosmetic-detail-variant > span {
+.cosmetic-detail-variant>span {
   color: var(--text-muted);
   font-size: 0.78rem;
 }
@@ -1980,8 +1991,8 @@ select {
     flex: 1;
   }
 
-  .collection-tools > button,
-  .collection-tools > select {
+  .collection-tools>button,
+  .collection-tools>select {
     flex: 1 1 auto;
   }
 
@@ -1989,7 +2000,22 @@ select {
     width: 100%;
   }
 
-  .catalog-filters > label {
+
+  .collection-item-card[draggable="true"] {
+    cursor: grab;
+  }
+
+  .collection-item-card.is-dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+  }
+
+  .collection-item-card.drag-over {
+    outline: 2px dashed var(--accent-color, #8b5cf6);
+    outline-offset: -4px;
+  }
+
+  .catalog-filters>label {
     flex: 0 0 auto;
   }
 
