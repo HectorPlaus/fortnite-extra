@@ -47,6 +47,20 @@ Los datos se guardan en **localStorage del navegador** (en tu dispositivo), no e
 3. Marca como "Perdido" si lo encontraste pero no lo capturaste
 4. Reinicia individuales o todos con los botones respectivos
 
+## Catálogo y colecciones
+
+La sección Catálogo de cosméticos consulta el catálogo público de Fortnite-API.com. Permite buscar, filtrar por tipo, conjunto y rareza, ordenar por nombre y añadir elementos manualmente a colecciones propias. Las colecciones admiten crear, renombrar, eliminar y quitar elementos; un cosmético puede estar en varias colecciones.
+
+El catálogo ordena inicialmente del más reciente al más antiguo usando la fecha `added` de la API. También se puede ordenar por antigüedad, nombre, rareza, tipo o conjunto.
+
+Cada tarjeta incluye **Ver detalle**, que muestra la descripción y metadatos disponibles, la galería de imágenes (incluidos assets LEGO/Bean y fondos cuando existan) y las opciones de estilo con sus imágenes. Los recursos que la API no proporciona para un cosmético se omiten.
+
+Las colecciones se guardan bajo la clave independiente `fortnite-espiritus-collections`. No se modifica `fortnite-espiritus-state`. Como cualquier dato de `localStorage`, las colecciones solo están disponibles en el mismo navegador y dispositivo; no se sincronizan entre dispositivos o navegadores.
+
+La petición probada a `?language=es-ES` devuelve HTTP 400 porque ese locale no está disponible en la API; `?language=es` responde correctamente. La petición directa desde el navegador también funciona con CORS, por lo que no se necesita backend ni clave API. El catálogo se descarga una vez por carga de página y los resultados se muestran por páginas para limitar el trabajo de renderizado.
+
+La pestaña Tienda consulta `/v2/shop?language=es` y permite buscar, filtrar por categoría, actualizar manualmente y ordenar por orden de la API, precio ascendente/descendente, nombre, fecha de salida, fecha de llegada, descuento absoluto en paVos, categoría o lotes primero. El detalle de un cosmético muestra su precio cuando está en la tienda; si forma parte de un lote u oferta con varios cosméticos, se indica que el importe corresponde a esa oferta y no al artículo individual.
+
 ## Archivos
 
 - `index.html` - Estructura HTML

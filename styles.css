@@ -1221,6 +1221,576 @@ button:disabled {
   height: 16px;
 }
 
+.app-navigation {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-tab {
+  min-width: 110px;
+  border-radius: 8px;
+}
+
+.app-tab[aria-selected="true"] {
+  border-color: var(--primary);
+  background: rgba(80, 250, 123, 0.12);
+  color: var(--primary);
+}
+
+.cosmetics-catalog-section {
+  margin-top: 0;
+}
+
+.cosmetics-heading,
+.collection-tools,
+.catalog-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cosmetics-heading {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.cosmetics-heading h2,
+#collectionTitle {
+  margin: 0 0 8px;
+}
+
+.cosmetics-heading p {
+  margin: 0;
+}
+
+.catalog-count {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.collection-tools {
+  margin-bottom: 16px;
+}
+
+.collection-create,
+.collection-rename {
+  display: flex;
+  gap: 8px;
+}
+
+.cosmetics-catalog-section input,
+.cosmetics-catalog-section select,
+.shop-controls input,
+.shop-controls select {
+  min-width: 0;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  color: var(--text);
+  font: inherit;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.collection-picker-label,
+.catalog-filters label {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.catalog-filters {
+  margin: 20px 0 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.catalog-search-label + input {
+  flex: 1 1 220px;
+}
+
+.catalog-filters select {
+  flex: 1 1 120px;
+}
+
+.catalog-message {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.catalog-message.catalog-error {
+  color: #ffb4ab;
+}
+
+.cosmetic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+.cosmetic-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.cosmetic-card-clickable {
+  cursor: pointer;
+}
+
+.cosmetic-card-clickable:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.cosmetic-card-image,
+.cosmetic-no-image {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  place-items: center;
+  background: var(--surface-strong);
+  object-fit: cover;
+}
+
+.cosmetic-no-image {
+  padding: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.cosmetic-card-content {
+  display: flex;
+  min-height: 112px;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+}
+
+.cosmetic-card h4 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.94rem;
+}
+
+.cosmetic-card-type,
+.cosmetic-card-set {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.cosmetic-card-content button {
+  margin-top: auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+.load-more-cosmetics {
+  display: block;
+  margin: 18px auto 0;
+}
+
+.collection-danger {
+  border-color: rgba(255, 110, 110, 0.4);
+}
+
+.collection-danger:hover {
+  background: rgba(255, 110, 110, 0.14);
+}
+
+.shop-heading,
+.shop-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.shop-heading {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.shop-heading h2 {
+  margin: 0 0 6px;
+}
+
+.shop-date,
+.shop-count {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.shop-controls {
+  margin-bottom: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.shop-controls input {
+  flex: 1 1 240px;
+}
+
+.shop-controls select {
+  flex: 1 1 180px;
+  color-scheme: dark;
+}
+
+.shop-controls option {
+  background-color: var(--surface-strong);
+  color: var(--text);
+}
+
+.shop-count {
+  margin-bottom: 12px;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 14px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+.shop-offer-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.shop-offer-image {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  background: var(--surface-strong);
+}
+
+.shop-offer-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 14px;
+}
+
+.shop-offer-category,
+.shop-valid-until {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.shop-offer-content h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1rem;
+}
+
+.shop-offer-prices,
+.shop-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shop-price {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.vbuck-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.shop-regular-price {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: line-through;
+}
+
+.shop-offer-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.shop-item-link {
+  padding: 5px 7px;
+  border-radius: 6px;
+  color: var(--primary-strong);
+  font-size: 0.76rem;
+}
+
+.shop-remaining-items {
+  align-self: center;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.cosmetic-detail-shop-price {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+}
+
+.cosmetic-detail-price-entry {
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.cosmetic-detail-price-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cosmetic-detail-price-entry .shop-valid-until {
+  font-size: 0.78rem;
+}
+
+.cosmetic-detail-dialog {
+  width: min(900px, calc(100vw - 24px));
+  max-height: min(900px, calc(100dvh - 24px));
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.cosmetic-detail-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+}
+
+.cosmetic-detail-dialog [hidden] {
+  display: none;
+}
+
+.cosmetic-detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.cosmetic-detail-header h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1.3rem;
+}
+
+.cosmetic-detail-header button {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.cosmetic-detail-content {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+}
+
+.cosmetic-detail-description {
+  margin: 0;
+  max-width: none;
+  color: var(--text);
+}
+
+.cosmetic-detail-metadata {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--border);
+}
+
+.cosmetic-detail-meta {
+  min-width: 0;
+  padding: 12px;
+  background: var(--surface-strong);
+}
+
+.cosmetic-detail-meta dt {
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.cosmetic-detail-meta dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.cosmetic-detail-section {
+  display: grid;
+  gap: 10px;
+}
+
+.cosmetic-detail-section h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.cosmetic-detail-gallery,
+.cosmetic-detail-variants {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.cosmetic-detail-variant {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+}
+
+.cosmetic-detail-preview {
+  display: grid;
+  min-height: 220px;
+  margin: 0;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+}
+
+.cosmetic-detail-preview-image,
+.cosmetic-detail-preview-fallback {
+  display: block;
+  width: 100%;
+  height: min(54vh, 460px);
+  min-height: 220px;
+  object-fit: contain;
+}
+
+.cosmetic-detail-preview-fallback {
+  aspect-ratio: 16 / 10;
+}
+
+.cosmetic-detail-preview-caption {
+  width: 100%;
+  padding: 9px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.cosmetic-detail-image-choice,
+.cosmetic-detail-variant-choice {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  color: var(--text);
+  text-align: left;
+}
+
+.cosmetic-detail-image-choice[aria-pressed="true"],
+.cosmetic-detail-variant-choice[aria-pressed="true"] {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.cosmetic-detail-image-choice img,
+.cosmetic-detail-variant-choice img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.cosmetic-detail-image-choice figcaption,
+.cosmetic-detail-variant-choice figcaption {
+  width: 100%;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.cosmetic-detail-variant {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.cosmetic-detail-variant strong,
+.cosmetic-detail-variant > span {
+  overflow-wrap: anywhere;
+}
+
+.cosmetic-detail-variant > span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.cosmetic-detail-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cosmetic-detail-color {
+  width: 30px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
 select {
   width: 100%;
   border-radius: 14px;
@@ -1240,6 +1810,70 @@ select {
 @media (max-width: 500px) {
   .level-row {
     gap: 6px;
+  }
+}
+
+@media (max-width: 700px) {
+  .app-navigation {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 8px 0;
+  }
+
+  .app-tab {
+    flex: 1;
+  }
+
+  .collection-create,
+  .collection-rename {
+    width: 100%;
+  }
+
+  .collection-create input,
+  .collection-rename input {
+    flex: 1;
+  }
+
+  .collection-tools > button,
+  .collection-tools > select {
+    flex: 1 1 auto;
+  }
+
+  .collection-picker-label {
+    width: 100%;
+  }
+
+  .catalog-filters > label {
+    flex: 0 0 auto;
+  }
+
+  .cosmetic-grid {
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 9px;
+  }
+
+  .cosmetic-detail-content {
+    padding: 14px;
+  }
+
+  .cosmetic-detail-header {
+    padding: 12px 14px;
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 9px;
+  }
+
+  .shop-offer-content {
+    gap: 7px;
+    padding: 10px;
+  }
+
+  .shop-controls input,
+  .shop-controls select {
+    flex-basis: 100%;
   }
 }
 

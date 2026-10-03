@@ -11,6 +11,13 @@
 
 <body>
   <main>
+    <nav class="app-navigation" role="tablist" aria-label="Secciones">
+      <button id="spiritsTab" class="app-tab" type="button" role="tab" aria-selected="true" aria-controls="spiritsView">Espíritus</button>
+      <button id="cosmeticsTab" class="app-tab" type="button" role="tab" aria-selected="false" aria-controls="cosmeticsCatalog">Cosméticos</button>
+      <button id="shopTab" class="app-tab" type="button" role="tab" aria-selected="false" aria-controls="shopView">Tienda</button>
+    </nav>
+
+    <section id="spiritsView" class="app-view" role="tabpanel" aria-labelledby="spiritsTab">
     <header class="page-header">
 
       <div class="controls-row">
@@ -103,9 +110,117 @@
     <section class="section">
       <div id="spiritGrid" class="grid"></div>
     </section>
+    </section>
+
+    <section id="cosmeticsCatalog" class="app-view cosmetics-catalog-section" role="tabpanel" aria-labelledby="cosmeticsTab" hidden>
+      <div class="cosmetics-heading">
+        <div>
+          <h2 id="cosmeticsTitle">Catálogo de cosméticos</h2>
+          <p>Busca cosméticos y organiza tus propias colecciones.</p>
+        </div>
+        <span id="catalogCount" class="catalog-count" aria-live="polite"></span>
+      </div>
+
+      <div class="collection-tools">
+        <form id="createCollectionForm" class="collection-create">
+          <label class="visually-hidden" for="newCollectionName">Nombre de la nueva colección</label>
+          <input id="newCollectionName" type="text" maxlength="60" placeholder="Nueva colección" required />
+          <button type="submit">Crear colección</button>
+        </form>
+        <label class="collection-picker-label" for="collectionPicker">Colección</label>
+        <select id="collectionPicker" aria-label="Seleccionar colección">
+          <option value="">Sin colecciones</option>
+        </select>
+        <form id="renameCollectionForm" class="collection-rename">
+          <label class="visually-hidden" for="renameCollectionName">Nuevo nombre de la colección</label>
+          <input id="renameCollectionName" type="text" maxlength="60" placeholder="Nuevo nombre" required />
+          <button id="renameCollectionButton" type="submit" disabled>Renombrar</button>
+        </form>
+        <button id="deleteCollectionButton" type="button" class="collection-danger" disabled>Eliminar</button>
+        <button id="viewCollectionButton" type="button" disabled>Ver colección</button>
+        <button id="backToCatalogButton" type="button" hidden>Volver al catálogo</button>
+      </div>
+
+      <p id="collectionStorageMessage" class="catalog-message" role="status" hidden></p>
+      <div id="cosmeticsCatalogView">
+        <div class="catalog-filters">
+          <label class="catalog-search-label" for="cosmeticSearch">Buscar</label>
+          <input id="cosmeticSearch" type="search" placeholder="Nombre del cosmético" autocomplete="off" />
+          <label for="cosmeticTypeFilter">Tipo</label>
+          <select id="cosmeticTypeFilter"><option value="">Todos</option></select>
+          <label for="cosmeticSetFilter">Conjunto</label>
+          <select id="cosmeticSetFilter"><option value="">Todos</option></select>
+          <label for="cosmeticRarityFilter">Rareza</label>
+          <select id="cosmeticRarityFilter"><option value="">Todas</option></select>
+          <label for="cosmeticSort">Orden</label>
+          <select id="cosmeticSort">
+            <option value="newest" selected>Más reciente</option>
+            <option value="oldest">Más antiguo</option>
+            <option value="name-asc">Nombre A-Z</option>
+            <option value="name-desc">Nombre Z-A</option>
+            <option value="rarity-asc">Rareza: menor a mayor</option>
+            <option value="rarity-desc">Rareza: mayor a menor</option>
+            <option value="type">Tipo</option>
+            <option value="set">Conjunto</option>
+          </select>
+        </div>
+        <p id="catalogMessage" class="catalog-message" role="status" aria-live="polite">Cargando cosméticos…</p>
+        <div id="cosmeticGrid" class="cosmetic-grid" aria-live="polite"></div>
+        <button id="loadMoreCosmetics" class="load-more-cosmetics" type="button" hidden>Mostrar más</button>
+      </div>
+
+      <div id="collectionView" hidden>
+        <h3 id="collectionTitle"></h3>
+        <p id="collectionMessage" class="catalog-message" role="status"></p>
+        <div id="collectionGrid" class="cosmetic-grid"></div>
+        <button id="loadMoreCollectionItems" class="load-more-cosmetics" type="button" hidden>Mostrar más</button>
+      </div>
+    </section>
+
+    <section id="shopView" class="app-view shop-view" role="tabpanel" aria-labelledby="shopTab" hidden>
+      <div class="shop-heading">
+        <div>
+          <h2>Tienda de Fortnite</h2>
+          <p id="shopDate" class="shop-date"></p>
+        </div>
+        <button id="refreshShopButton" type="button">Actualizar tienda</button>
+      </div>
+      <div class="shop-controls">
+        <label class="visually-hidden" for="shopSearch">Buscar en la tienda</label>
+        <input id="shopSearch" type="search" placeholder="Buscar oferta o cosmético" autocomplete="off" />
+        <label for="shopCategoryFilter">Categoría</label>
+        <select id="shopCategoryFilter"><option value="">Todas</option></select>
+        <label for="shopSort">Ordenar por</label>
+        <select id="shopSort">
+          
+          <option value="newest">Más recientes en tienda</option>
+          <option value="ending-soon">Terminan primero</option>
+          <option value="default">Orden de la tienda</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name">Nombre A-Z</option>
+          <option value="discount">Mayor descuento en paVos</option>
+          <option value="category">Categoría A-Z</option>
+          <option value="bundles">Lotes primero</option>
+        </select>
+      </div>
+      <p id="shopMessage" class="catalog-message" role="status" aria-live="polite">Abre Tienda para consultar las ofertas actuales.</p>
+      <p id="shopCount" class="shop-count" aria-live="polite"></p>
+      <div id="shopGrid" class="shop-grid" aria-live="polite"></div>
+      <button id="loadMoreShopOffers" class="load-more-cosmetics" type="button" hidden>Mostrar más ofertas</button>
+    </section>
+
+    <dialog id="cosmeticDetailDialog" class="cosmetic-detail-dialog" aria-labelledby="cosmeticDetailTitle">
+      <div class="cosmetic-detail-header">
+        <h2 id="cosmeticDetailTitle"></h2>
+        <button id="closeCosmeticDetail" type="button" aria-label="Cerrar detalle">Cerrar</button>
+      </div>
+      <div id="cosmeticDetailContent" class="cosmetic-detail-content"></div>
+    </dialog>
   </main>
 
   <script src="script.js"></script>
+  <script src="catalogo.js"></script>
 </body>
 
 </html>
