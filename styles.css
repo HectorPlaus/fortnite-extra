@@ -1315,8 +1315,102 @@ button:disabled {
   flex: 1 1 220px;
 }
 
+.catalog-type-filter {
+  position: relative;
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.catalog-type-filter summary {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.catalog-type-filter summary::-webkit-details-marker {
+  display: none;
+}
+
+.catalog-type-filter summary::after {
+  margin-left: auto;
+  color: var(--text-muted);
+  content: '\25BE';
+}
+
+.catalog-type-filter[open] summary {
+  border-color: var(--primary);
+}
+
+.catalog-type-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 8;
+  display: grid;
+  width: min(320px, calc(100vw - 48px));
+  max-height: min(320px, 55vh);
+  gap: 4px;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+}
+
+.catalog-type-option {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.catalog-type-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.catalog-type-option input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--primary);
+}
+
 .catalog-filters select {
   flex: 1 1 120px;
+}
+
+.catalog-bulk-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+
+.catalog-bulk-controls button {
+  padding: 9px 12px;
+  border-radius: 8px;
+}
+
+.bulk-add-message {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.86rem;
 }
 
 .catalog-message {
@@ -1846,6 +1940,14 @@ select {
 
   .catalog-filters > label {
     flex: 0 0 auto;
+  }
+
+  .catalog-type-filter {
+    flex-basis: 100%;
+  }
+
+  .catalog-bulk-controls button {
+    width: 100%;
   }
 
   .cosmetic-grid {

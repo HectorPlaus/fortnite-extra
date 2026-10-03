@@ -2,8 +2,14 @@
   const catalogUrl = 'https://fortnite-api.com/v2/cosmetics/br?language=es';
   const shopUrl = 'https://fortnite-api.com/v2/shop?language=es';
   const collectionsKey = 'fortnite-espiritus-collections';
+  const activeTabKey = 'fortnite-espiritus-active-tab';
   const pageSize = 72;
   const catalogGrid = document.getElementById('cosmeticGrid');
+  const cosmeticTypeOptions = document.getElementById('cosmeticTypeOptions');
+  const cosmeticTypeSummary = document.getElementById('cosmeticTypeSummary');
+  const selectedCosmeticTypes = new Set();
+  const bulkAddCosmeticsButton = document.getElementById('addFilteredCosmeticsButton');
+  const bulkAddMessage = document.getElementById('bulkAddMessage');
   const collectionGrid = document.getElementById('collectionGrid');
   const catalogMessage = document.getElementById('catalogMessage');
   const collectionMessage = document.getElementById('collectionMessage');
@@ -133,6 +139,8 @@
     document.getElementById('viewCollectionButton').disabled = !hasSelection;
     document.getElementById('createCollectionForm').querySelector('button').disabled = !canEdit;
     document.getElementById('newCollectionName').disabled = !canEdit;
+    bulkAddCosmeticsButton.disabled = !hasSelection || !canEdit
+      || Number(bulkAddCosmeticsButton.dataset.addableCount || 0) === 0;
     collectionPicker.disabled = collectionData.length === 0;
     catalogGrid.querySelectorAll('[data-collection-action]').forEach((button) => {
       button.disabled = !hasSelection || !canEdit;
@@ -159,14 +167,64 @@
       .forEach(([value, label]) => select.appendChild(createOption(value, label)));
   }
 
+  function updateCosmeticTypeSummary() {
+    const selectedLabels = [...selectedCosmeticTypes]
+      .map((value) => cosmeticTypeLabels.get(value))
+      .filter(Boolean);
+    if (!selectedLabels.length) {
+      cosmeticTypeSummary.textContent = 'Tipos: todos';
+    } else if (selectedLabels.length <= 2) {
+      cosmeticTypeSummary.textContent = `Tipos: ${selectedLabels.join(', ')}`;
+    } else {
+      cosmeticTypeSummary.textContent = `Tipos: ${selectedLabels.length} seleccionados`;
+    }
+  }
+
+  let cosmeticTypeLabels = new Map();
+
+  function populateCosmeticTypeFilter(values) {
+    cosmeticTypeLabels = values;
+    [...selectedCosmeticTypes].forEach((value) => {
+      if (!values.has(value)) selectedCosmeticTypes.delete(value);
+    });
+    cosmeticTypeOptions.replaceChildren();
+
+    [...values.entries()]
+      .sort((first, second) => first[1].localeCompare(second[1], 'es'))
+      .forEach(([value, labelText]) => {
+        const label = document.createElement('label');
+        label.className = 'catalog-type-option';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = value;
+        checkbox.checked = selectedCosmeticTypes.has(value);
+        const text = document.createElement('span');
+        text.textContent = labelText;
+        label.append(checkbox, text);
+        checkbox.addEventListener('change', () => {
+          if (checkbox.checked) selectedCosmeticTypes.add(value);
+          else selectedCosmeticTypes.delete(value);
+          updateCosmeticTypeSummary();
+          catalogLimit = pageSize;
+          renderCatalog();
+        });
+        cosmeticTypeOptions.appendChild(label);
+      });
+
+    updateCosmeticTypeSummary();
+  }
+
   function normalizeCosmetic(item) {
     const typeValue = item.type?.value || item.type?.displayValue || 'unknown';
+    const typeLabel = [item.type?.displayValue, item.type?.value]
+      .find((value) => typeof value === 'string' && value.trim() && value.toLocaleLowerCase('es') !== 'null')
+      || 'Sin tipo';
     return {
       id: String(item.id),
       name: typeof item.name === 'string' && item.name ? item.name : String(item.id),
       typeValue: String(typeValue),
       typeCode: item.type?.backendValue || '',
-      typeLabel: item.type?.displayValue || item.type?.value || 'Sin tipo',
+      typeLabel,
       rarityValue: item.rarity?.value || '',
       rarityCode: item.rarity?.backendValue || '',
       rarityLabel: item.rarity?.displayValue || item.rarity?.value || '',
@@ -239,7 +297,7 @@
         }
         if (cosmetic.setValue && !sets.has(cosmetic.setValue)) sets.set(cosmetic.setValue, cosmetic.setValue);
       });
-      populateFilter('cosmeticTypeFilter', types, 'Todos');
+      populateCosmeticTypeFilter(types);
       populateFilter('cosmeticSetFilter', sets, 'Todos');
       populateFilter('cosmeticRarityFilter', rarities, 'Todas');
       catalogMessage.textContent = '';
@@ -919,7 +977,6 @@
 
   function getFilteredCosmetics() {
     const query = document.getElementById('cosmeticSearch').value.trim().toLocaleLowerCase('es');
-    const type = document.getElementById('cosmeticTypeFilter').value;
     const set = document.getElementById('cosmeticSetFilter').value;
     const rarity = document.getElementById('cosmeticRarityFilter').value;
     const sortMode = document.getElementById('cosmeticSort').value;
@@ -953,7 +1010,7 @@
     }[sortMode] || compareName;
 
     return cosmetics.filter((cosmetic) => (!query || cosmetic.name.toLocaleLowerCase('es').includes(query))
-      && (!type || cosmetic.typeValue === type)
+      && (!selectedCosmeticTypes.size || selectedCosmeticTypes.has(cosmetic.typeValue))
       && (!set || cosmetic.setValue === set)
       && (!rarity || cosmetic.rarityValue === rarity))
       .sort(compare);
@@ -962,6 +1019,7 @@
   function renderCatalog() {
     if (!cosmetics.length) return;
     const results = getFilteredCosmetics();
+    bulkAddMessage.textContent = '';
     const fragment = document.createDocumentFragment();
     results.slice(0, catalogLimit).forEach((cosmetic) => fragment.appendChild(makeCosmeticCard(cosmetic, false)));
     catalogGrid.replaceChildren(fragment);
@@ -969,6 +1027,12 @@
     catalogMessage.classList.remove('catalog-error');
     catalogMessage.textContent = results.length ? '' : 'No hay cosméticos que coincidan con esos filtros.';
     loadMoreCosmeticsButton.hidden = results.length <= catalogLimit;
+    const selectedCollection = getSelectedCollection();
+    const selectedIds = new Set(selectedCollection?.items.map((item) => item.id) || []);
+    const addableCount = results.reduce((count, cosmetic) => count + Number(!selectedIds.has(cosmetic.id)), 0);
+    bulkAddCosmeticsButton.dataset.addableCount = String(addableCount);
+    bulkAddCosmeticsButton.textContent = `Añadir resultados a la colección (${addableCount.toLocaleString('es')})`;
+    bulkAddCosmeticsButton.disabled = storageLocked || !selectedCollection || addableCount === 0;
     refreshCollectionControls();
   }
 
@@ -1034,6 +1098,35 @@
     }
   }
 
+  function addFilteredCosmeticsToCollection() {
+    const selected = getSelectedCollection();
+    if (!selected || storageLocked) return;
+    const selectedIds = new Set(selected.items.map((item) => item.id));
+    const additions = getFilteredCosmetics()
+      .filter((cosmetic) => !selectedIds.has(cosmetic.id))
+      .map((cosmetic) => ({
+        id: cosmetic.id,
+        name: cosmetic.name,
+        type: cosmetic.typeLabel,
+        image: cosmetic.image
+      }));
+
+    if (!additions.length) {
+      bulkAddMessage.textContent = `Todos los resultados ya están en «${selected.name}».`;
+      return;
+    }
+
+    const nextCollections = collectionData.map((collection) => collection.id === selected.id
+      ? { ...collection, items: [...collection.items, ...additions] }
+      : collection);
+    if (saveCollections(nextCollections)) {
+      catalogLimit = pageSize;
+      renderCatalog();
+      renderCollection();
+      bulkAddMessage.textContent = `Se añadieron ${additions.length.toLocaleString('es')} cosméticos a «${selected.name}».`;
+    }
+  }
+
   document.getElementById('createCollectionForm').addEventListener('submit', (event) => {
     event.preventDefault();
     const input = document.getElementById('newCollectionName');
@@ -1051,6 +1144,7 @@
 
   collectionPicker.addEventListener('change', () => {
     selectedCollectionId = collectionPicker.value;
+    bulkAddMessage.textContent = '';
     refreshCollectionControls();
     renderCatalog();
     renderCollection();
@@ -1142,6 +1236,11 @@
   function selectAppTab(selectedTab) {
     const spiritsSelected = selectedTab === spiritsTab;
     const cosmeticsSelected = selectedTab === cosmeticsTab;
+    try {
+      localStorage.setItem(activeTabKey, selectedTab.id);
+    } catch {
+      // The tab still works when browser storage is unavailable.
+    }
     document.getElementById('spiritsView').hidden = !spiritsSelected;
     document.getElementById('cosmeticsCatalog').hidden = !cosmeticsSelected;
     shopView.hidden = selectedTab !== shopTab;
@@ -1151,6 +1250,15 @@
       loadCatalog();
     }
     if (cosmeticsSelected || selectedTab === shopTab) loadShop();
+  }
+
+  function getSavedAppTab() {
+    try {
+      const savedTabId = localStorage.getItem(activeTabKey);
+      return appTabs.find((tab) => tab.id === savedTabId) || spiritsTab;
+    } catch {
+      return spiritsTab;
+    }
   }
 
   spiritsTab.addEventListener('click', () => selectAppTab(spiritsTab));
@@ -1167,9 +1275,12 @@
     });
   });
 
-  ['cosmeticTypeFilter', 'cosmeticSetFilter', 'cosmeticRarityFilter', 'cosmeticSort'].forEach((id) => {
+  bulkAddCosmeticsButton.addEventListener('click', addFilteredCosmeticsToCollection);
+
+  ['cosmeticSetFilter', 'cosmeticRarityFilter', 'cosmeticSort'].forEach((id) => {
     document.getElementById(id).addEventListener('change', () => {
       catalogLimit = pageSize;
+      bulkAddMessage.textContent = '';
       renderCatalog();
     });
   });
@@ -1178,9 +1289,11 @@
     window.clearTimeout(searchTimer);
     searchTimer = window.setTimeout(() => {
       catalogLimit = pageSize;
+      bulkAddMessage.textContent = '';
       renderCatalog();
     }, 140);
   });
 
   refreshCollectionControls();
+  selectAppTab(getSavedAppTab());
 })();

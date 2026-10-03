@@ -146,8 +146,10 @@
         <div class="catalog-filters">
           <label class="catalog-search-label" for="cosmeticSearch">Buscar</label>
           <input id="cosmeticSearch" type="search" placeholder="Nombre del cosmético" autocomplete="off" />
-          <label for="cosmeticTypeFilter">Tipo</label>
-          <select id="cosmeticTypeFilter"><option value="">Todos</option></select>
+          <details id="cosmeticTypeFilter" class="catalog-type-filter">
+            <summary id="cosmeticTypeSummary">Tipos: todos</summary>
+            <div id="cosmeticTypeOptions" class="catalog-type-options" role="group" aria-labelledby="cosmeticTypeSummary"></div>
+          </details>
           <label for="cosmeticSetFilter">Conjunto</label>
           <select id="cosmeticSetFilter"><option value="">Todos</option></select>
           <label for="cosmeticRarityFilter">Rareza</label>
@@ -163,6 +165,10 @@
             <option value="type">Tipo</option>
             <option value="set">Conjunto</option>
           </select>
+        </div>
+        <div class="catalog-bulk-controls">
+          <button id="addFilteredCosmeticsButton" type="button" disabled>Añadir resultados a la colección (0)</button>
+          <p id="bulkAddMessage" class="bulk-add-message" role="status" aria-live="polite"></p>
         </div>
         <p id="catalogMessage" class="catalog-message" role="status" aria-live="polite">Cargando cosméticos…</p>
         <div id="cosmeticGrid" class="cosmetic-grid" aria-live="polite"></div>
