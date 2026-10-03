@@ -49,7 +49,7 @@ Los datos se guardan en **localStorage del navegador** (en tu dispositivo), no e
 
 ## Catálogo y colecciones
 
-La sección Catálogo de cosméticos consulta el catálogo público de Fortnite-API.com. Permite buscar, filtrar por varios tipos a la vez, conjunto y rareza, ordenar por nombre y añadir elementos manualmente a colecciones propias. El botón de acción masiva añade todos los resultados de los filtros a la colección seleccionada, no solo las tarjetas de la página cargada. Las colecciones admiten crear, renombrar, eliminar y quitar elementos; un cosmético puede estar en varias colecciones.
+La sección Catálogo de cosméticos consulta el catálogo público de Fortnite-API.com. Permite buscar, filtrar por varios tipos a la vez, conjunto y rareza, ordenar por nombre y añadir elementos manualmente a colecciones propias. El botón de acción masiva añade todos los resultados de los filtros a la colección seleccionada, no solo las tarjetas de la página cargada. Las colecciones admiten crear, renombrar, eliminar, quitar y reordenar elementos; un cosmético puede estar en varias colecciones.
 
 El catálogo ordena inicialmente del más reciente al más antiguo usando la fecha `added` de la API. También se puede ordenar por antigüedad, nombre, rareza, tipo o conjunto.
 

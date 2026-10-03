@@ -1449,6 +1449,35 @@ button:disabled {
   outline-offset: 2px;
 }
 
+.collection-item-card {
+  position: relative;
+}
+
+.cosmetic-card-content .collection-remove-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(13, 17, 23, 0.9);
+  color: var(--text);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.cosmetic-card-content .collection-remove-button:hover {
+  border-color: rgba(255, 110, 110, 0.65);
+  background: rgba(255, 110, 110, 0.2);
+  color: #ffb4ab;
+}
+
 .cosmetic-card-image,
 .cosmetic-no-image {
   display: grid;
@@ -1494,6 +1523,28 @@ button:disabled {
   padding: 8px 10px;
   border-radius: 8px;
   font-size: 0.82rem;
+}
+
+.collection-reorder-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.cosmetic-card-content .collection-reorder-button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.cosmetic-card-content .collection-reorder-button:disabled {
+  opacity: 0.35;
 }
 
 .load-more-cosmetics {

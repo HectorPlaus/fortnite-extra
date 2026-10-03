@@ -912,7 +912,7 @@
     if (!shopLoaded) loadShop();
   }
 
-  function makeCosmeticCard(cosmetic, inCollection) {
+  function makeCosmeticCard(cosmetic, inCollection, collectionIndex = 0, collectionLength = 0) {
     const card = document.createElement('article');
     card.className = 'cosmetic-card cosmetic-card-clickable';
     card.tabIndex = 0;
@@ -962,9 +962,32 @@
       action.addEventListener('click', () => toggleCosmeticInCollection(cosmetic));
       content.appendChild(action);
     } else {
+      card.classList.add('collection-item-card');
+      const reorderControls = document.createElement('div');
+      reorderControls.className = 'collection-reorder-controls';
+      [
+        { direction: -1, label: 'Mover arriba', symbol: '↑' },
+        { direction: 1, label: 'Mover abajo', symbol: '↓' }
+      ].forEach(({ direction, label, symbol }) => {
+        const moveButton = document.createElement('button');
+        moveButton.type = 'button';
+        moveButton.className = 'collection-reorder-button';
+        moveButton.textContent = symbol;
+        moveButton.title = `${label} en la colección`;
+        moveButton.setAttribute('aria-label', `${label} ${cosmetic.name} en la colección`);
+        moveButton.disabled = storageLocked
+          || collectionIndex + direction < 0
+          || collectionIndex + direction >= collectionLength;
+        moveButton.addEventListener('click', () => moveCosmeticInCollection(cosmetic.id, direction));
+        reorderControls.appendChild(moveButton);
+      });
+      content.appendChild(reorderControls);
+
       const action = document.createElement('button');
       action.type = 'button';
-      action.textContent = 'Quitar de la colección';
+      action.className = 'collection-remove-button';
+      action.textContent = '×';
+      action.title = 'Quitar de la colección';
       action.setAttribute('aria-label', `Quitar ${cosmetic.name} de la colección`);
       action.disabled = storageLocked;
       action.addEventListener('click', () => removeCosmeticFromCollection(cosmetic.id));
@@ -1056,7 +1079,9 @@
       image: saved.image
     });
     const fragment = document.createDocumentFragment();
-    items.slice(0, collectionLimit).forEach((cosmetic) => fragment.appendChild(makeCosmeticCard(cosmetic, true)));
+    items.slice(0, collectionLimit).forEach((cosmetic, index) => {
+      fragment.appendChild(makeCosmeticCard(cosmetic, true, index, items.length));
+    });
     collectionGrid.replaceChildren(fragment);
     catalogCount.textContent = `${items.length.toLocaleString('es')} elementos`;
     collectionMessage.textContent = items.length ? '' : 'Esta colección está vacía.';
@@ -1096,6 +1121,21 @@
       renderCatalog();
       renderCollection();
     }
+  }
+
+  function moveCosmeticInCollection(cosmeticId, direction) {
+    const selected = getSelectedCollection();
+    if (!selected || storageLocked) return;
+    const items = [...selected.items];
+    const currentIndex = items.findIndex((item) => item.id === cosmeticId);
+    const targetIndex = currentIndex + direction;
+    if (currentIndex < 0 || targetIndex < 0 || targetIndex >= items.length) return;
+
+    [items[currentIndex], items[targetIndex]] = [items[targetIndex], items[currentIndex]];
+    const nextCollections = collectionData.map((collection) => collection.id === selected.id
+      ? { ...collection, items }
+      : collection);
+    if (saveCollections(nextCollections)) renderCollection();
   }
 
   function addFilteredCosmeticsToCollection() {
