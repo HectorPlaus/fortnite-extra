@@ -2157,3 +2157,70 @@ footer {
     font-size: 0.85rem;
   }
 }
+
+/* ===== Pestañas de categoría, "Ocultar los de la colección" y "Borrar filtros" ===== */
+/* Pega este bloque AL FINAL de styles.css */
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0 4px;
+  padding-bottom: 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.category-tab {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 84px;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.category-tab-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.category-tab[aria-pressed="true"] {
+  border-color: var(--text);
+  background: var(--text);
+  color: #0d1117;
+}
+
+.catalog-toggle[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: rgba(80, 250, 123, 0.12);
+  color: var(--primary);
+}
+
+.catalog-clear-filters {
+  border-color: rgba(255, 110, 110, 0.5);
+  color: var(--danger);
+}
+
+.catalog-clear-filters:hover {
+  background: rgba(255, 110, 110, 0.14);
+}
+
+@media (max-width: 700px) {
+  .category-tab {
+    min-width: 72px;
+    padding: 8px 10px;
+  }
+
+  .catalog-bulk-controls .catalog-toggle,
+  .catalog-bulk-controls .catalog-clear-filters {
+    flex: 1 1 auto;
+  }
+}

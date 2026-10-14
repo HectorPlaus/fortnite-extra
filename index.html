@@ -7,6 +7,7 @@
   <title>Fortnite Extra</title>
   <link id="tabIcon" rel="icon" href="" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tags.css" />
 </head>
 
 <body>
@@ -143,17 +144,16 @@
 
       <p id="collectionStorageMessage" class="catalog-message" role="status" hidden></p>
       <div id="cosmeticsCatalogView">
+        <div id="cosmeticCategoryTabs" class="category-tabs" role="group" aria-label="Categorías de cosméticos"></div>
         <div class="catalog-filters">
           <label class="catalog-search-label" for="cosmeticSearch">Buscar</label>
-          <input id="cosmeticSearch" type="search" placeholder="Nombre del cosmético" autocomplete="off" />
-          <details id="cosmeticTypeFilter" class="catalog-type-filter">
-            <summary id="cosmeticTypeSummary">Tipos: todos</summary>
-            <div id="cosmeticTypeOptions" class="catalog-type-options" role="group" aria-labelledby="cosmeticTypeSummary"></div>
-          </details>
+          <input id="cosmeticSearch" type="search" placeholder="Nombre o artista" autocomplete="off" />
           <label for="cosmeticSetFilter">Conjunto</label>
           <select id="cosmeticSetFilter"><option value="">Todos</option></select>
           <label for="cosmeticRarityFilter">Rareza</label>
           <select id="cosmeticRarityFilter"><option value="">Todas</option></select>
+          <label for="cosmeticSeasonFilter">Temporada</label>
+          <select id="cosmeticSeasonFilter"><option value="">Todas</option></select>
           <label for="cosmeticSort">Orden</label>
           <select id="cosmeticSort">
             <option value="newest" selected>Más reciente</option>
@@ -167,6 +167,8 @@
           </select>
         </div>
         <div class="catalog-bulk-controls">
+          <button id="hideOwnedButton" type="button" class="catalog-toggle" aria-pressed="false" disabled>Ocultar los de la colección</button>
+          <button id="clearCatalogFilters" type="button" class="catalog-clear-filters">Borrar filtros</button>
           <button id="addFilteredCosmeticsButton" type="button" disabled>Añadir resultados a la colección (0)</button>
           <p id="bulkAddMessage" class="bulk-add-message" role="status" aria-live="polite"></p>
         </div>
@@ -227,6 +229,7 @@
 
   <script src="script.js"></script>
   <script src="catalogo.js"></script>
+  <script src="tags.js"></script>
 </body>
 
 </html>

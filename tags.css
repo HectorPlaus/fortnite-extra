@@ -1,0 +1,254 @@
+/* Estilos del sistema de etiquetas. Todo con prefijo .ftag- para no afectar a otras pantallas. */
+
+.ftag-filter {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+}
+
+.ftag-filter[hidden] {
+  display: none;
+}
+
+.ftag-filter-header,
+.ftag-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ftag-filter-header {
+  justify-content: space-between;
+}
+
+.ftag-group-label {
+  min-width: 78px;
+  color: var(--text-muted, #8b949e);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ftag-chip {
+  --ftag-color: #6272a4;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--ftag-color);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ftag-color) 16%, transparent);
+  color: var(--text, #f8f8f2);
+  font-size: 0.82rem;
+}
+
+.ftag-chip-button {
+  cursor: pointer;
+}
+
+.ftag-chip-button[aria-pressed="true"] {
+  background: var(--ftag-color);
+  color: #0d1117;
+  font-weight: 700;
+}
+
+.ftag-mode {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.ftag-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ftag-detail .ftag-chip {
+  cursor: default;
+}
+
+/* ---- Administración ---- */
+.ftag-admin-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  border-radius: 999px;
+  background: var(--surface-strong, #21262d);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.ftag-admin {
+  width: min(980px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+  border-radius: 10px;
+  background: var(--surface, #161b22);
+  color: var(--text, #f8f8f2);
+}
+
+.ftag-admin::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+}
+
+.ftag-admin input,
+.ftag-admin select,
+.ftag-admin textarea {
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+  border-radius: 8px;
+  background: var(--surface-strong, #21262d);
+  color: var(--text, #f8f8f2);
+  font: inherit;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.ftag-admin input[type="color"] {
+  width: 44px;
+  height: 38px;
+  padding: 2px;
+}
+
+.ftag-admin input[type="checkbox"] {
+  width: auto;
+}
+
+.ftag-admin textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.ftag-admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+  background: var(--surface, #161b22);
+}
+
+.ftag-admin-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.ftag-admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 18px 0;
+}
+
+.ftag-admin-tabs button[aria-selected="true"] {
+  border-color: var(--primary, #50fa7b);
+  color: var(--primary, #50fa7b);
+}
+
+.ftag-admin-body {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.ftag-admin-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ftag-admin-row > input[type="text"],
+.ftag-admin-row > input[type="search"] {
+  flex: 1 1 160px;
+}
+
+.ftag-admin-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.ftag-admin label {
+  display: grid;
+  gap: 4px;
+  color: var(--text-muted, #8b949e);
+  font-size: 0.85rem;
+}
+
+.ftag-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.ftag-checks label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ftag-label,
+.ftag-hint {
+  margin: 0;
+  color: var(--text-muted, #8b949e);
+  font-size: 0.82rem;
+}
+
+.ftag-rule,
+.ftag-cosmetic {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+  border-radius: 8px;
+  background: var(--surface-strong, #21262d);
+}
+
+.ftag-results {
+  display: grid;
+  gap: 8px;
+}
+
+.ftag-danger {
+  border-color: rgba(255, 110, 110, 0.5);
+  color: var(--danger, #ff6e6e);
+}
+
+.ftag-test-result ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--text-muted, #8b949e);
+  font-size: 0.85rem;
+}
+
+.ftag-chip-action {
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+}
+
+.ftag-origin-removed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.ftag-origin-manual {
+  border-style: solid;
+}
+
+.ftag-origin-auto {
+  border-style: dashed;
+}
