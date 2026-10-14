@@ -52,9 +52,10 @@
     };
     const tagName = (id) => draft.tags.find((tag) => tag.id === id)?.name || id;
 
+    // `draft` es siempre el mismo objeto que editan las tarjetas; setData guarda su propia copia
+    // saneada. No hay que reasignar `draft`: las tarjetas abiertas conservan referencias a él.
     function save() {
         T.setData(draft);
-        draft = JSON.parse(JSON.stringify(T.getData()));
     }
 
     // ---------- Etiquetas ----------
@@ -296,7 +297,7 @@
             headers: { ...headers, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 message: 'Actualizar etiquetas de cosméticos',
-                content: toBase64(`${JSON.stringify(draft, null, 2)}\n`),
+                content: toBase64(`${JSON.stringify(T.getData(), null, 2)}\n`),
                 branch: settings.branch,
                 ...(sha ? { sha } : {})
             })
@@ -323,7 +324,7 @@
                 h('button', {
                     type: 'button',
                     onclick: () => {
-                        const blob = new Blob([`${JSON.stringify(draft, null, 2)}\n`], { type: 'application/json' });
+                        const blob = new Blob([`${JSON.stringify(T.getData(), null, 2)}\n`], { type: 'application/json' });
                         const link = h('a', { href: URL.createObjectURL(blob), download: 'tags-data.json' });
                         document.body.appendChild(link);
                         link.click();
@@ -385,7 +386,7 @@
                 h('button', { type: 'button', onclick: () => dialog.close() }, 'Cerrar')),
             h('div', { class: 'ftag-admin-tabs', role: 'tablist' }, tabs.map(([id, label]) => h('button', {
                 type: 'button', role: 'tab', 'aria-selected': String(tab === id),
-                onclick: () => { tab = id; render(); }
+                onclick: () => { dialog.querySelector(':focus')?.blur(); tab = id; render(); }
             }, label))),
             h('div', { class: 'ftag-admin-body' }, body));
     }
