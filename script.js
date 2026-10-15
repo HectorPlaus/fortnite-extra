@@ -56,7 +56,10 @@ const baseSprites = [
   { id: 49, name: "Spooky Dash", rarity: "mythic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_L.webp" },
   { id: 50, name: "Vampire", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_L.webp" },
   { id: 51, name: "The Deer", rarity: "legendary", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_L.webp" },
-  { id: 52, name: "Dumpster Dive", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_L.webp" }
+  { id: 52, name: "Dumpster Dive", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_L.webp" },
+
+  { id:53, name: "Honey", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Robo_L.webp" },
+  { id:54, name: "One Wish Willow", rarity: "epic", type: "Season4", image: "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Robo_L.webp" }
 
 ];
 //crownIcon: 'https://fortnite.gg/img/x/sprites/crown.webp'
@@ -345,7 +348,7 @@ function getSpecialImageByType(spriteId, type) {
 const rarityOrder = { mythic: 0, legendary: 1, epic: 2, rare: 3, common: 4, special: 5 };
 // 26 = Bush, 27 = Adventure, 28 = Jonesy, 29 = 8-Bit, 30 = Storm Scout, 31 = Shadow, 32 = Tails, 33 = Killswitch, 34 = Sonic, 35 = Jackrabbit, 36 = Klombo, 37 = Crown
 // 40 = Mega Man, 41 = Overshield, 42 = X-Ray, 43 = Onigiri, 44 = Blinky, 45 = Crash Bandicoot, 46 = Pond, 47 = Morgana, 48 = Birthday , 49 = Vampire, 50 = The Deer, 51 = Dumpster Dive
-const fortniteOrder = [52, 28, 27, 26, 34, 32, 31, 29, 35, 37, 33, 36, 40, 41, 46, 42, 43, 30, 44, 48, 45, 47, 49, 51, 50];
+const fortniteOrder = [28, 27, 26, 34, 32, 31, 29, 35, 37, 33, 36, 40, 41, 46, 42, 43, 30, 44, 52, 48, 45, 47, 49, 51, 50, 53, 54];
 const storageKey = 'fortnite-espiritus-state';
 const gridElement = document.getElementById('spiritGrid');
 const resetAllButton = document.getElementById('resetAll');
