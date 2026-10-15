@@ -1,28 +1,104 @@
 {
   "version": 1,
   "tags": [
-    { "id": "peliculas", "name": "Películas", "group": "Temática", "color": "#e5484d" },
-    { "id": "series", "name": "Series", "group": "Temática", "color": "#f76b15" },
-    { "id": "superheroes", "name": "Superhéroes", "group": "Temática", "color": "#3e63dd" },
-    { "id": "villanos", "name": "Villanos", "group": "Temática", "color": "#8e4ec6" },
-    { "id": "anime", "name": "Anime", "group": "Temática", "color": "#d6409f" },
-    { "id": "videojuegos", "name": "Videojuegos", "group": "Temática", "color": "#12a594" },
-    { "id": "deportes", "name": "Deportes", "group": "Temática", "color": "#30a46c" },
-    { "id": "musica", "name": "Música", "group": "Temática", "color": "#ffc53d" },
-    { "id": "comida", "name": "Comida", "group": "Temática", "color": "#ab6400" },
-    { "id": "animales", "name": "Animales", "group": "Temática", "color": "#978365" },
-    { "id": "marvel", "name": "Marvel", "group": "Franquicia", "color": "#e5484d" },
-    { "id": "dc", "name": "DC", "group": "Franquicia", "color": "#0090ff" },
-    { "id": "starwars", "name": "Star Wars", "group": "Franquicia", "color": "#ffe629" }
+    {
+      "id": "peliculas",
+      "name": "Películas",
+      "group": "Temática",
+      "color": "#e5484d"
+    },
+    {
+      "id": "series",
+      "name": "Series",
+      "group": "Temática",
+      "color": "#f76b15"
+    },
+    {
+      "id": "superheroes",
+      "name": "Superhéroes",
+      "group": "Temática",
+      "color": "#3e63dd"
+    },
+    {
+      "id": "villanos",
+      "name": "Villanos",
+      "group": "Temática",
+      "color": "#8e4ec6"
+    },
+    {
+      "id": "anime",
+      "name": "Anime",
+      "group": "Temática",
+      "color": "#d6409f"
+    },
+    {
+      "id": "videojuegos",
+      "name": "Videojuegos",
+      "group": "Temática",
+      "color": "#12a594"
+    },
+    {
+      "id": "deportes",
+      "name": "Deportes",
+      "group": "Temática",
+      "color": "#30a46c"
+    },
+    {
+      "id": "musica",
+      "name": "Música",
+      "group": "Temática",
+      "color": "#ffc53d"
+    },
+    {
+      "id": "comida",
+      "name": "Comida",
+      "group": "Temática",
+      "color": "#ab6400"
+    },
+    {
+      "id": "animales",
+      "name": "Animales",
+      "group": "Temática",
+      "color": "#978365"
+    },
+    {
+      "id": "marvel",
+      "name": "Marvel",
+      "group": "Franquicia",
+      "color": "#e5484d"
+    },
+    {
+      "id": "dc",
+      "name": "DC",
+      "group": "Franquicia",
+      "color": "#0090ff"
+    },
+    {
+      "id": "starwars",
+      "name": "Star Wars",
+      "group": "Franquicia",
+      "color": "#ffe629"
+    },
+    {
+      "id": "terror",
+      "name": "Terror",
+      "group": "Temática",
+      "color": "#6272a4"
+    }
   ],
   "rules": [
     {
       "id": "regla-marvel",
       "tag": "marvel",
       "enabled": true,
-      "fields": ["series", "seriesCode"],
+      "fields": [
+        "series",
+        "seriesCode"
+      ],
       "mode": "contains",
-      "any": ["marvel"],
+      "any": [
+        "marvel"
+      ],
       "none": [],
       "kinds": [],
       "types": []
@@ -31,9 +107,14 @@
       "id": "regla-dc",
       "tag": "dc",
       "enabled": true,
-      "fields": ["series", "seriesCode"],
+      "fields": [
+        "series",
+        "seriesCode"
+      ],
       "mode": "word",
-      "any": ["dc"],
+      "any": [
+        "dc"
+      ],
       "none": [],
       "kinds": [],
       "types": []
@@ -42,9 +123,15 @@
       "id": "regla-starwars",
       "tag": "starwars",
       "enabled": true,
-      "fields": ["series", "seriesCode"],
+      "fields": [
+        "series",
+        "seriesCode"
+      ],
       "mode": "contains",
-      "any": ["star wars", "starwars"],
+      "any": [
+        "star wars",
+        "starwars"
+      ],
       "none": [],
       "kinds": [],
       "types": []
@@ -53,9 +140,16 @@
       "id": "regla-videojuegos",
       "tag": "videojuegos",
       "enabled": true,
-      "fields": ["series", "seriesCode"],
+      "fields": [
+        "series",
+        "seriesCode"
+      ],
       "mode": "contains",
-      "any": ["gaming legends", "gaminglegends", "leyendas del gaming"],
+      "any": [
+        "gaming legends",
+        "gaminglegends",
+        "leyendas del gaming"
+      ],
       "none": [],
       "kinds": [],
       "types": []
@@ -64,23 +158,174 @@
       "id": "regla-musica-jam",
       "tag": "musica",
       "enabled": true,
-      "fields": ["name"],
+      "fields": [
+        "name"
+      ],
       "mode": "word",
       "any": [],
       "none": [],
-      "kinds": ["tracks", "instruments"],
+      "kinds": [
+        "tracks",
+        "instruments"
+      ],
       "types": []
     },
     {
       "id": "regla-musica-lobby",
       "tag": "musica",
       "enabled": true,
-      "fields": ["name"],
+      "fields": [
+        "name"
+      ],
       "mode": "word",
       "any": [],
       "none": [],
-      "kinds": ["br"],
-      "types": ["music"]
+      "kinds": [
+        "br"
+      ],
+      "types": [
+        "music"
+      ]
+    },
+    {
+      "id": "regla",
+      "tag": "anime",
+      "enabled": true,
+      "fields": [
+        "name",
+        "setCode",
+        "set"
+      ],
+      "mode": "word",
+      "any": [
+        "dragon ball",
+        "my hero academia",
+        "naruto",
+        "black clover",
+        "bleach",
+        "jujutsu kaisen",
+        "one-punch man",
+        "one piece",
+        "kaiju",
+        "cowboy bebop",
+        "escuadron de operaciones"
+      ],
+      "none": [],
+      "kinds": [],
+      "types": []
+    },
+    {
+      "id": "regla-2",
+      "tag": "terror",
+      "enabled": true,
+      "fields": [
+        "name",
+        "set"
+      ],
+      "mode": "word",
+      "any": [
+        "Ghost Face",
+        "Freddy Krueger",
+        "Marioneta malvada",
+        "Universo de Jason",
+        "Art el Payaso",
+        "La Forma",
+        "Leatherface",
+        "Five Nights at Freddy's",
+        "Monstruos de Universal",
+        "llamada de la venganza"
+      ],
+      "none": [],
+      "kinds": [],
+      "types": []
+    },
+    {
+      "id": "regla-3",
+      "tag": "series",
+      "enabled": true,
+      "fields": [
+        "set",
+        "setCode"
+      ],
+      "mode": "word",
+      "any": [
+        "Mighty Morphin",
+        "Stranger Things",
+        "processnotebook",
+        "cleardefend",
+        "sitruin",
+        "loosebeam",
+        "hielo y fuego",
+        "playday",
+        "rubbishmouse",
+        "turnedpills",
+        "loki",
+        "wheatcrisis",
+        "devotecatch",
+        "leanscale",
+        "guestfiction",
+        "bluebuffalo",
+        "dueego",
+        "softclaw",
+        "dino thunder"
+      ],
+      "none": [],
+      "kinds": [],
+      "types": []
+    },
+    {
+      "id": "regla-4",
+      "tag": "peliculas",
+      "enabled": true,
+      "fields": [
+        "set",
+        "setCode"
+      ],
+      "mode": "word",
+      "any": [
+        "Ghost Face",
+        "Freddy Krueger",
+        "Marioneta malvada",
+        "Universo de Jason",
+        "Art el Payaso",
+        "La Forma",
+        "Leatherface",
+        "Five Nights at Freddy's",
+        "Monstruos de Universal",
+        "llamada de la venganza",
+        "clan arashikage",
+        "tron",
+        "titanes de monarca",
+        "rambo",
+        "eduardo manostijeras",
+        "creed",
+        "bala perdida",
+        "pesadilla en la cabaña",
+        "omni consumer",
+        "indiana jones",
+        "free guy",
+        "la odisea",
+        "dune",
+        "rootwater",
+        "uncharted",
+        "shoegrab",
+        "regreso al futuro",
+        "clothknife",
+        "redflowers",
+        "overallstake",
+        "foresttracker",
+        "tonetrip",
+        "john wick",
+        "piratas del caribe",
+        "rareevoke",
+        "aguaman",
+        "black adam",
+        "superman",
+        "supergirl"
+      ],
+      "none": [],
+      "kinds": [],
+      "types": []
     }
   ],
   "overrides": {}
